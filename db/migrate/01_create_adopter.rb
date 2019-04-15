@@ -4,6 +4,11 @@ class CreateAdopter < ActiveRecord::Migration
 		create_table :adopters do |t|
 			t.string :first_name
 			t.string :last_name
+			t.string :username
+			t.string :prefered_species
+			t.string :preferred_temperament
+			t.string :preferred_size
+			t.string :zip
 		end 
 	end 
 

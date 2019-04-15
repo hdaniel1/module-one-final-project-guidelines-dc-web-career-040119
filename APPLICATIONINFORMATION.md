@@ -22,6 +22,10 @@ https://userguide.rescuegroups.org/display/APIDG/HTTP+API+object+information+and
 	-Attributes:
 		1. first_name - string, required
 		2. last_name - string, required
+		3. username - string, required
+		4. preferred_species - string, required
+		5. preferred_size - string, required
+		6. preferred_temperament - string, required
 	-Methods:
 		1. See all Adopters
 		2. See all favorited pets
@@ -29,15 +33,7 @@ https://userguide.rescuegroups.org/display/APIDG/HTTP+API+object+information+and
 		4. Edit my preferences
 		5. See my attended events
 		6. See my volunteer history
-2. Preferences 
-	-Attributes:
-		1. Adopter - integer, required
-		2. Breed - string, optional
-		3. Size - string, optional (Options = Small, Medium, Large)
-		4. Species - string, optional (Options = Dog, Cat, Rabbit)
-		5. Temperament - string, optional (Options = Friendly, Aggressive, Quiet)
-		6. Age - integer, optional 
-3. Pet
+2. Pet
 	-Attributes:
 		1. Name - string, optional
 		2. Breed - string, optional
@@ -50,7 +46,7 @@ https://userguide.rescuegroups.org/display/APIDG/HTTP+API+object+information+and
 	-Methods:
 		1. See all pets
 		2. See all potential Adopters
-4. Shelter
+3. Shelter
 	-Attributes:
 		1. Name - string, required
 		2. Street - string, required
@@ -65,7 +61,7 @@ https://userguide.rescuegroups.org/display/APIDG/HTTP+API+object+information+and
 		5. See pets by breed
 		6. See all shelters that have volunteer work
 		7. See all events
-5. Area
+4. Area
 	-Attributes:
 		1. Zip - string, required
 		3. City, string, required
@@ -73,22 +69,22 @@ https://userguide.rescuegroups.org/display/APIDG/HTTP+API+object+information+and
 		1. See all areas
 		2. See all shelters in area
 		3. See all available pets???
-6. Event
+5. Event
 	-Attributes:
 		1. Shelter - integer, required
 		2. Location - string, required
 		3. Description - string, required
 		4. Start_time - datetime, required
 		5. End_time - datetime, required
-7. Favorited_Pets (J)
+6. Favorited_Pets (J)
 	-Attributes:
 		1. Pet - integer, required
 		2. Adopter - integer, required
-8. Volunteer_Interest (J)
+7. Volunteer_Interest (J)
 	-Attributes:
 		1. Shelter - integer, required
 		2. Adopter - integer, required
-9. Event_attendance (J)
+8. Event_attendance (J)
 	-Attributes:
 		1. Attended - boolean, optional
 		2. Event - integer, required

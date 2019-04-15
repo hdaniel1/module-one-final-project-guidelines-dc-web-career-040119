@@ -15,6 +15,11 @@ ActiveRecord::Schema.define(version: 5) do
   create_table "adopters", force: :cascade do |t|
     t.string "first_name"
     t.string "last_name"
+    t.string "username"
+    t.string "prefered_species"
+    t.string "preferred_temperament"
+    t.string "preferred_size"
+    t.string "zip"
   end
 
   create_table "favorite_pets", force: :cascade do |t|
@@ -32,15 +37,6 @@ ActiveRecord::Schema.define(version: 5) do
     t.string  "miscellaneous"
     t.boolean "available?"
     t.integer "shelter_id"
-  end
-
-  create_table "preferences", force: :cascade do |t|
-    t.string  "breed"
-    t.string  "species"
-    t.string  "size"
-    t.integer "age"
-    t.string  "temperament"
-    t.integer "adopter_id"
   end
 
   create_table "shelters", force: :cascade do |t|
