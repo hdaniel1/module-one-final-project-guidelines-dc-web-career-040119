@@ -33,10 +33,10 @@ https://userguide.rescuegroups.org/display/APIDG/HTTP+API+object+information+and
 	-Attributes:
 		1. Adopter - integer, required
 		2. Breed - string, optional
-		3. Size - string, optional
-		4. Species - string, optional
-		5. Temperament - string, optional
-		6. Age - integer, optional
+		3. Size - string, optional (Options = Small, Medium, Large)
+		4. Species - string, optional (Options = Dog, Cat, Rabbit)
+		5. Temperament - string, optional (Options = Friendly, Aggressive, Quiet)
+		6. Age - integer, optional 
 3. Pet
 	-Attributes:
 		1. Name - string, optional
