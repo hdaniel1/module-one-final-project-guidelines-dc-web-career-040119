@@ -18,20 +18,20 @@ https://userguide.rescuegroups.org/display/APIDG/HTTP+API+object+information+and
 7. As a user, I want to sign up for events in my area
 
 # Object Models
-1. Adoptee
+1. Adopter
 	-Attributes:
 		1. first_name - string, required
 		2. last_name - string, required
 	-Methods:
-		1. See all adoptees
+		1. See all Adopters
 		2. See all favorited pets
-		3. See my preferences
+		3. See my preferences by species
 		4. Edit my preferences
 		5. See my attended events
 		6. See my volunteer history
 2. Preferences 
 	-Attributes:
-		1. Adoptee - integer, required
+		1. Adopter - integer, required
 		2. Breed - string, optional
 		3. Size - string, optional
 		4. Species - string, optional
@@ -43,13 +43,13 @@ https://userguide.rescuegroups.org/display/APIDG/HTTP+API+object+information+and
 		2. Breed - string, optional
 		3. Species - string, required
 		4. Size (small, medium, large) - string, required
-		5. Temperament (aggressive, sedentary, family-oriented), Sstring, required
+		5. Temperament (aggressive, sedentary, family-oriented) - string, required
 		6. Age - integer, required
 		7. Misc.(Special needs, diet, etc.) - string, optional
 		8. Available?  - boolean, required
 	-Methods:
 		1. See all pets
-		2. See all potential adoptees
+		2. See all potential Adopters
 4. Shelter
 	-Attributes:
 		1. Name - string, required
@@ -83,23 +83,23 @@ https://userguide.rescuegroups.org/display/APIDG/HTTP+API+object+information+and
 7. Favorited_Pets (J)
 	-Attributes:
 		1. Pet - integer, required
-		2. Adoptee - integer, required
+		2. Adopter - integer, required
 8. Volunteer_Interest (J)
 	-Attributes:
 		1. Shelter - integer, required
-		2. Adoptee - integer, required
+		2. Adopter - integer, required
 9. Event_attendance (J)
 	-Attributes:
 		1. Attended - boolean, optional
 		2. Event - integer, required
-		3. Adoptee - integer, required
+		3. Adopter - integer, required
 
 
 # Object Relationships
 Shelter <> Pet = 1:N
 Area <> Shelter = 1:N
-Adoptee <> Preferences 1:N
-Adoptee <> Pet = N:N through favorited_pets
+Adopter <> Preferences 1:N
+Adopter <> Pet = N:N through favorited_pets
 User <> Shelter = N:N through volunteer table
 User <> Event = N:N through event_attendance
 
