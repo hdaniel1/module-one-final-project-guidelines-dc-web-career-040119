@@ -93,8 +93,8 @@ https://userguide.rescuegroups.org/display/APIDG/HTTP+API+object+information+and
 # Object Relationships
 Shelter <> Pet = 1:N
 Area <> Shelter = 1:N
-Adoptee <> Pet = N:N through favorited_pets
 Adoptee <> Preferences 1:N
+Adoptee <> Pet = N:N through favorited_pets
 User <> Shelter = N:N through volunteer table
 User <> Event = N:N through event_attendance
 
