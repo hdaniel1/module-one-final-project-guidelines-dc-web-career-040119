@@ -1,10 +1,10 @@
-#Module One Final Project - Animal Shelter Application
+# Module One Final Project - Animal Shelter Application
 
-#API Information
-
+# API Information
+ 
 https://userguide.rescuegroups.org/display/APIDG/HTTP+API+object+information+and+code+examples
 
-#User-Stories
+# User-Stories
 1. As a user, I want to log in and specify certain preferences
 2. As a user, I want to see all available pets/shelters based on my preferences
 3. As a user, I want to adopt a pet
@@ -13,7 +13,7 @@ https://userguide.rescuegroups.org/display/APIDG/HTTP+API+object+information+and
 6. As a user, I want to see all events in my area
 7. As a user, I want to sign up for events in my area
 
-#Object Models
+# Object Models
 1. Adoptee
 	-Attributes:
 		1. first_name - string, required
