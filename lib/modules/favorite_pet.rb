@@ -1,4 +1,4 @@
-class FavoritePet < ActiveRecord::Base[4.2]
+class FavoritePet < ActiveRecord::Base
 	belongs_to :pet 
 	belongs_to :adopter
 

@@ -1,4 +1,4 @@
-class Shelter < ActiveRecord::Base[4.2]
+class Shelter < ActiveRecord::Base
 	has_many :pets
 
 end 

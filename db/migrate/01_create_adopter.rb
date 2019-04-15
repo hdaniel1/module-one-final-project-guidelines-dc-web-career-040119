@@ -1,4 +1,4 @@
-class CreateAdopter < ActiveRecord::Migration[4.2]
+class CreateAdopter < ActiveRecord::Migration
 
 	def change 
 		create_table :adopters do |t|

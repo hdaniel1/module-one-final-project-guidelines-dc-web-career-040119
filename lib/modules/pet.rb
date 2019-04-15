@@ -1,4 +1,4 @@
-class Pet < ActiveRecord::Base[4.2]
+class Pet < ActiveRecord::Base
 	belongs_to :shelter
 	has_many :adopters, through: :favorite_pets
 

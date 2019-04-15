@@ -1,4 +1,4 @@
-class CreatePet < ActiveRecord::Migration[4.2]
+class CreatePet < ActiveRecord::Migration
 
 	def change 
 		create_table :pets do |t|

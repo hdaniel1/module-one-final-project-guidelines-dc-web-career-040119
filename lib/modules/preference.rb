@@ -1,4 +1,4 @@
-class Preference < ActiveRecord::Base[4.2]
+class Preference < ActiveRecord::Base
 	belongs_to :adopters
 
 end 

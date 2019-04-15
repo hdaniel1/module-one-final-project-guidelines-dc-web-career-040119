@@ -1,4 +1,4 @@
-class Adopter < ActiveRecord::Base[4.2]
+class Adopter < ActiveRecord::Base
 	has_many :preferences
 	has_many :pets, through: :favorite_pets
 end 

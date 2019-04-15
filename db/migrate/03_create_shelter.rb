@@ -1,4 +1,4 @@
-class CreateShelter < ActiveRecord::Migration[4.2]
+class CreateShelter < ActiveRecord::Migration
 
 	def change 
 		create_table :shelters do |t|
