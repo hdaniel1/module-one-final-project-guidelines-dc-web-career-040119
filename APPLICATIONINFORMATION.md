@@ -12,7 +12,7 @@ https://userguide.rescuegroups.org/display/APIDG/HTTP+API+object+information+and
 1. As a user, I want to log in and specify certain adoption preferences
 2. As a user, I want to see all available pets/shelters based on my preferences
 3. As a user, I want to adopt a pet
-4. As a user, I want to see all shelters in my area that offer voluneteer work
+4. As a user, I want to see all shelters in my area that offer volunteer work
 5. As a user, I want to sign up for volunteer work
 6. As a user, I want to see all events in my area
 7. As a user, I want to sign up for events in my area
@@ -26,8 +26,9 @@ https://userguide.rescuegroups.org/display/APIDG/HTTP+API+object+information+and
 		1. See all adoptees
 		2. See all favorited pets
 		3. See my preferences
-		4. See my attended events
-		5. See my volunteer history
+		4. Edit my preferences
+		5. See my attended events
+		6. See my volunteer history
 2. Preferences 
 	-Attributes:
 		1. Adoptee - integer, required
@@ -63,10 +64,10 @@ https://userguide.rescuegroups.org/display/APIDG/HTTP+API+object+information+and
 		4. See all adopted pets
 		5. See pets by breed
 		6. See all shelters that have volunteer work
+		7. See all events
 5. Area
 	-Attributes:
 		1. Zip - string, required
-		2. List of shelters
 		3. City, string, required
 	-Methods: 
 		1. See all areas
