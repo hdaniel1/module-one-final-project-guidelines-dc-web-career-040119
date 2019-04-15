@@ -18,21 +18,23 @@ https://userguide.rescuegroups.org/display/APIDG/HTTP+API+object+information+and
 	-Attributes:
 		1. first_name - string, required
 		2. last_name - string, required
-		3. favorited_pets - array, optional
-		4. Preferences
-			-Breed
-			-Size
-			-Temperament
-			-Price
-			-Area
-			-Age
 	-Methods:
 		1. See all adoptees
 		2. See all favorited pets
-		3. See preferences
-2. Pet
+		3. See my preferences
+		4. See my attended events
+		5. See my volunteer history
+2. Preferences 
 	-Attributes:
-		1. name - string, optional
+		1. Adoptee - integer, required
+		2. Breed - string, optional
+		3. Size - string, optional
+		4. Species - string, optional
+		5. Temperament - string, optional
+		6. Age - integer, optional
+3. Pet
+	-Attributes:
+		1. Name - string, optional
 		2. Breed - string, optional
 		3. Species - string, required
 		4. Size (small, medium, large) - string, required
@@ -43,14 +45,13 @@ https://userguide.rescuegroups.org/display/APIDG/HTTP+API+object+information+and
 	-Methods:
 		1. See all pets
 		2. See all potential adoptees
-3. Shelter
+4. Shelter
 	-Attributes:
 		1. Name - string, required
 		2. Street - string, required
 		3. City - string, required
 		4. Zip - string, required
-		5. List of pets - array, optional
-		6. Volunteer? - boolean, optional
+		5. Volunteer? - boolean, optional
 	-Methods:
 		1. See all shelters
 		2. See all pets
@@ -58,7 +59,7 @@ https://userguide.rescuegroups.org/display/APIDG/HTTP+API+object+information+and
 		4. See all adopted pets
 		5. See pets by breed
 		6. See all shelters that have volunteer work
-4. Area
+5. Area
 	-Attributes:
 		1. Zip - string, required
 		2. List of shelters
@@ -67,22 +68,22 @@ https://userguide.rescuegroups.org/display/APIDG/HTTP+API+object+information+and
 		1. See all areas
 		2. See all shelters in area
 		3. See all available pets???
-5. Event
+6. Event
 	-Attributes:
 		1. Shelter - integer, required
 		2. Location - string, required
 		3. Description - string, required
 		4. Start_time - datetime, required
 		5. End_time - datetime, required
-6. Favorited_Pets (J)
+7. Favorited_Pets (J)
 	-Attributes:
 		1. Pet - integer, required
 		2. Adoptee - integer, required
-7. Volunteer_Interest (J)
+8. Volunteer_Interest (J)
 	-Attributes:
 		1. Shelter - integer, required
 		2. Adoptee - integer, required
-8. Event_attendance (J)
+9. Event_attendance (J)
 	-Attributes:
 		1. Attended - boolean, optional
 		2. Event - integer, required
@@ -93,6 +94,7 @@ https://userguide.rescuegroups.org/display/APIDG/HTTP+API+object+information+and
 Shelter <> Pet = 1:N
 Area <> Shelter = 1:N
 Adoptee <> Pet = N:N through favorited_pets
+Adoptee <> Preferences 1:N
 User <> Shelter = N:N through volunteer table
 User <> Event = N:N through event_attendance
 
