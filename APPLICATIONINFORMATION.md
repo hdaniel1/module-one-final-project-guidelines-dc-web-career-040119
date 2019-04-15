@@ -1,10 +1,14 @@
 # Module One Final Project - Animal Shelter Application
 
+# Contributors
+-Dan Hallada
+-Matthew Lindsey
+
 # API Information
  
 https://userguide.rescuegroups.org/display/APIDG/HTTP+API+object+information+and+code+examples
 
-# User-Stories
+# User Stories
 1. As a user, I want to log in and specify certain adoption preferences
 2. As a user, I want to see all available pets/shelters based on my preferences
 3. As a user, I want to adopt a pet
