@@ -99,4 +99,16 @@ Adopter <> Pet = N:N through favorited_pets
 User <> Shelter = N:N through volunteer table
 User <> Event = N:N through event_attendance
 
+# Flow
+1. Welcome page
+	-Existing user? 
+		If yes, prompt login - verify username against existing data
+		If no, create new adopter. Verify username against existing data to ensure does not exist already.
+2. Logged in, presented with homepage options
+	-Update preferences
+	-Browse available pets
+	-Adopt a pet
+	-See events in area / sign up
+	-Volunteer
+
 
