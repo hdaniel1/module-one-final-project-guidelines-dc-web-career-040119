@@ -1,5 +1,9 @@
 refer to user stories in APPLICATIONINFORMATION.md
 
+DONE
+1. Login/logout logic
+2. Setting pet preferences
+
 MUST DO
 
 1. Return list of pets based on my preferences (species, temperament, size for shelters matching my zip)
