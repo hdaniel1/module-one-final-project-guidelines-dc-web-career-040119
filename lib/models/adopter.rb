@@ -3,10 +3,91 @@ class Adopter < ActiveRecord::Base
 	has_many :favorite_pets
 	has_many :pets, through: :favorite_pets
 
+	#gets the users fullname
 	def full_name
 		"#{self.first_name} #{self.last_name}"
 	end 
 
+	#present menu options
+	def present_options
+		puts "Hello #{self.full_name}"
+		puts "What can we help you with today? Please enter the number corresponding with what you would like to do:"
+		puts "1. Review & Update Preferences"
+		puts "2. See available pets"
+		puts "3. Adopt a Pet"
+		puts "4. Logout"
+		self.choose_menu_option
+	end 
+
+	#menu options paths
+	def choose_menu_option 
+		response = gets.chomp
+		if response == "1"
+			self.show_preferences
+		elsif response == "4"
+			puts "Goodbye"
+			$user = nil
+		end
+	end 	
+
+	#shows user's existing preferences
+	def show_preferences
+		puts "Your preferences are as follows:"
+		puts "1. Species - #{self.preferred_species}"
+		puts "2. Temperament - #{self.preferred_temperament}"
+		puts "3. Size - #{self.preferred_size}"
+		puts "To update your preferences, enter 'change'. Otherwise, enter 'exit' to return to the main menu"
+		self.change_preferences
+		self.save
+	end 
+
+	#goes through methods to update preferences
+	def change_preferences
+		response = gets.chomp
+		if response == "change"
+			self.set_preferred_species
+			self.set_preferred_temperament
+			self.set_preferred_size
+			self.present_options
+		elsif response =='exit'
+			self.present_options
+		else 
+			puts "Please enter a valid response"
+		end
+	end
+
+	#wording for updating preferred_species
+	def set_preferred_species
+		puts "What type of animal are you looking for?"
+		puts "We offer the following species:"
+		puts "1. Dogs"
+		puts "2. Cats"
+		puts "3. Rabbits"
+		puts "Please enter the number corresponding to the species you're interested in"
+		self.parse_species	
+	end 
+
+	#wording for updating preferred_temperament
+	def set_preferred_temperament 
+		puts "Please choose from one of the following temperaments"
+		puts "1. Outgoing"
+		puts "2. Quiet"
+		puts "3. Independent"
+		self.parse_temperament
+		self.save
+	end 
+
+	#wording for updating preferred_size
+	def set_preferred_size
+		puts "Please choose from one of the following sizes"
+		puts "1. Small"
+		puts "2. Medium"
+		puts "3. Large"
+		self.parse_size
+		self.save
+	end
+
+	#logic for defining user response for preferred species
 	def parse_species 
 		preferred_species = []
 		valid_responses = ["1", "2", "3"]
@@ -44,6 +125,7 @@ class Adopter < ActiveRecord::Base
 		end #ends the loop
 	end 
 
+	#logic for defining user response for preferred temperament
 	def parse_temperament 
 
 		temperament = nil
@@ -66,7 +148,6 @@ class Adopter < ActiveRecord::Base
 			puts "Thank you for your selection"
 			break 
 		elsif response.downcase == "quit"
-			self.preferred_temperament = nil
 			puts "Goodbye"
 			break
 		else 
@@ -76,6 +157,7 @@ class Adopter < ActiveRecord::Base
 		end #ends the loop
 	end
 
+	#logic for defining user response for preferred size
 	def parse_size 
 
 		size = nil
@@ -98,7 +180,6 @@ class Adopter < ActiveRecord::Base
 			puts "Thank you for your selection"
 			break 
 		elsif response.downcase == "quit"
-			self.preferred_size = nil
 			puts "Goodbye"
 			break
 		else 
@@ -108,46 +189,4 @@ class Adopter < ActiveRecord::Base
 		end #ends the loop
 	end
 
-	def present_options
-		puts "Hello #{self.full_name}"
-		puts "What can we help you with today? Please enter the number corresponding with what you would like to do:"
-		puts "1. Review & Update Preferences"
-		puts "2. See available pets"
-		puts "3. Adopt a Pet"
-		puts "4. Logout"
-	end 
-
-
-	def set_preferred_species
-		puts "What type of animal are you looking for?"
-		puts "We offer the following species:"
-		puts "1. Dogs"
-		puts "2. Cats"
-		puts "3. Rabbits"
-		puts "Please enter the number corresponding to the species you're interested in"
-		self.parse_species	
-	end 
-
-	def set_preferred_temperament 
-		puts "Please choose from one of the following temperaments"
-		puts "1. Outgoing"
-		puts "2. Quiet"
-		puts "3. Independent"
-		self.parse_temperament
-	end 
-
-	def set_preferred_size
-		puts "Please choose from one of the following sizes"
-		puts "1. Small"
-		puts "2. Medium"
-		puts "3. Large"
-		self.parse_size
-	end
-
-	def show_preferences
-		puts "Your preferences are as follows:"
-		puts "1. Species - #{self.preferred_species}"
-		puts "2. Temperament - #{self.preferred_temperament}"
-		puts "3. Size - #{self.preferred_size}"
-	end 
 end 
