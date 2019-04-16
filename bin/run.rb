@@ -4,4 +4,3 @@ $user = nil
 
 welcome 
 
-$user.present_options

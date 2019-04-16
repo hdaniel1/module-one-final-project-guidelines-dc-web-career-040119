@@ -19,6 +19,7 @@ def welcome
 		$user.set_preferred_species
 		$user.set_preferred_temperament
 		$user.set_preferred_size
+		$user.present_options
 		break
 	elsif response.downcase == "quit"
 		puts "Have a nice day!"
