@@ -15,7 +15,7 @@ class Adopter < ActiveRecord::Base
 		puts "What can we help you with today? Please enter the number corresponding with what you would like to do:"
 		puts "1. Review & Update Preferences"
 		puts "2. See available pets"
-		puts "3. Adopt a Pet"
+		puts "3. View my favorite pets"
 		puts "4. Logout"
 		self.choose_menu_option
 	end 
