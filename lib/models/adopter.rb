@@ -4,15 +4,15 @@ class Adopter < ActiveRecord::Base
 	has_many :pets, through: :favorite_pets
 
 	def parse_species 
-		puts "Please enter the number corresponding to the species you're interested in. Enter done to finalize selection"
 		preferred_species = []
-		loop do 
-		response = gets.chomp
-
 		valid_responses = ["1", "2", "3"]
-
+		loop do 
+		
+		response = gets.chomp
+		#make sure response contains appropriate values
 		if (response.split.uniq - valid_responses).empty?
-			response.split.uniq.each do |i|
+			#pushes corresponding species into array
+			response.split.uniq.each {|i|
 				if i == "1"
 					preferred_species << "Dogs"
 				elsif i == "2"
@@ -20,19 +20,24 @@ class Adopter < ActiveRecord::Base
 				elsif i == "3"
 					preferred_species << "Rabbits"
 				end 	
-			end 
+			}
 			puts  "You entered #{preferred_species.uniq}. If this is correct, enter 'done'. Otherwise, please re-enter your choices."
+		#finalizes selection
 		elsif response.downcase == "done"
+			self.preferred_species = "#{preferred_species}"
 			puts "Thank you for your selection"
-		break #return to homepage
+			break #return to homepage here
+		#quits selection
 		elsif response.downcase == "quit"
 			preferred_species = []
 			puts "Goodbye"
 			break #return to homepage here
+		#invalid response
 		else
 			puts "Invalid response - to quit, type 'quit'"
 		end 
-		end 
+
+		end #ends the loop
 	end 
 
 	def set_preferred_species
@@ -41,6 +46,7 @@ class Adopter < ActiveRecord::Base
 		puts "1. Dogs"
 		puts "2. Cats"
 		puts "3. Rabbits"
+		puts "Please enter the number corresponding to the species you're interested in"
 		self.parse_species	
 	end 
 end 
