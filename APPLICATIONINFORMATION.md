@@ -10,12 +10,13 @@ https://userguide.rescuegroups.org/display/APIDG/HTTP+API+object+information+and
 
 # User Stories
 1. As a user, I want to log in and specify certain adoption preferences
-2. As a user, I want to see all available pets/shelters based on my preferences
-3. As a user, I want to adopt a pet
-4. As a user, I want to see all shelters in my area that offer volunteer work
-5. As a user, I want to sign up for volunteer work
-6. As a user, I want to see all events in my area
-7. As a user, I want to sign up for events in my area
+2. As a user, I want to see all available pets based on my preferences for shelters in my zip
+3. As a user, I want to favorite pets within my preferences to view later
+4. As a user, I want to adopt a pet(s) from my favorited pets
+5. As a user, I want to see all shelters in my area that offer volunteer work
+6. As a user, I want to sign up for volunteer work
+7. As a user, I want to see all events in my area
+8. As a user, I want to sign up for events in my area
 
 # Object Models
 1. Adopter
@@ -26,6 +27,7 @@ https://userguide.rescuegroups.org/display/APIDG/HTTP+API+object+information+and
 		4. preferred_species - string, required
 		5. preferred_size - string, required
 		6. preferred_temperament - string, required
+		7. zip - string, required
 	-Methods:
 		1. See all Adopters
 		2. See all favorited pets
@@ -43,6 +45,7 @@ https://userguide.rescuegroups.org/display/APIDG/HTTP+API+object+information+and
 		6. Age - integer, required
 		7. Misc.(Special needs, diet, etc.) - string, optional
 		8. Available?  - boolean, required
+		9. Owner ID - integer, optional
 	-Methods:
 		1. See all pets
 		2. See all potential Adopters
@@ -96,8 +99,9 @@ Shelter <> Pet = 1:N
 Area <> Shelter = 1:N
 Adopter <> Preferences 1:N
 Adopter <> Pet = N:N through favorited_pets
-User <> Shelter = N:N through volunteer table
-User <> Event = N:N through event_attendance
+Adopter <> Pet = 1:N (owning the pet)
+Adopter <> Shelter = N:N through volunteer table
+Adopter <> Event = N:N through event_attendance
 
 # Flow
 1. Welcome page

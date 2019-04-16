@@ -1,3 +1,5 @@
+refer to user stories in APPLICATIONINFORMATION.md
+
 MUST DO
 
 1. Return list of pets based on my preferences (species, temperament, size for shelters matching my zip)
