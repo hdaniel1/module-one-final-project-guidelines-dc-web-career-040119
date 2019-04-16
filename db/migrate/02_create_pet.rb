@@ -10,6 +10,7 @@ class CreatePet < ActiveRecord::Migration
 			t.integer :age
 			t.string :miscellaneous
 			t.boolean :available?
+			t.integer :owner_id
 			t.integer :shelter_id
 		end 
 	end 

@@ -36,6 +36,7 @@ ActiveRecord::Schema.define(version: 5) do
     t.integer "age"
     t.string  "miscellaneous"
     t.boolean "available?"
+    t.integer "owner_id"
     t.integer "shelter_id"
   end
 

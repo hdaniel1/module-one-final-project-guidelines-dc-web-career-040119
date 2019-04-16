@@ -11,5 +11,4 @@ class CreateAdopter < ActiveRecord::Migration
 			t.string :zip
 		end 
 	end 
-
 end 
