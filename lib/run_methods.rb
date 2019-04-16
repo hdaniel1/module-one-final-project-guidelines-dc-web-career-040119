@@ -10,6 +10,7 @@ def welcome
 	response = gets.chomp
 	if response.downcase == "yes"
 		login
+		$user.present_options
 		break
 	elsif response.downcase == "no"
 		puts "Please create an account to continue"

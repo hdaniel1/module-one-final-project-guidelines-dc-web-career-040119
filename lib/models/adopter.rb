@@ -43,17 +43,21 @@ class Adopter < ActiveRecord::Base
 
 	#goes through methods to update preferences
 	def change_preferences
+		loop do 
 		response = gets.chomp
 		if response == "change"
 			self.set_preferred_species
 			self.set_preferred_temperament
 			self.set_preferred_size
 			self.present_options
+			break
 		elsif response =='exit'
 			self.present_options
+			break
 		else 
 			puts "Please enter a valid response"
 		end
+		end 
 	end
 
 	#wording for updating preferred_species
@@ -144,8 +148,12 @@ class Adopter < ActiveRecord::Base
 			temperament = "Independent"
 			puts "You chose #{temperament}. If this is correct, enter 'done'. Otherwise, please re-enter your choice."
 		elsif response == "done"
-			self.preferred_temperament = temperament
-			puts "Thank you for your selection"
+			if temperament.nil? == false
+				self.preferred_temperament = temperament
+				puts "Thank you for your selection"
+			else
+				puts "Thank you for your selection"
+			end
 			break 
 		elsif response.downcase == "quit"
 			puts "Goodbye"
@@ -167,17 +175,21 @@ class Adopter < ActiveRecord::Base
 		response = gets.chomp
 		#make sure response contains appropriate values
 		if response == "1"
-			size = "Outgoing"
+			size = "Small"
 			puts "You chose #{size}. If this is correct, enter 'done'. Otherwise, please re-enter your choice."
 		elsif response == "2"
-			size = "Quiet"
+			size = "Medium"
 			puts "You chose #{size}. If this is correct, enter 'done'. Otherwise, please re-enter your choice."
 		elsif response == "3"
-			size = "Independent"
+			size = "Large"
 			puts "You chose #{size}. If this is correct, enter 'done'. Otherwise, please re-enter your choice."
 		elsif response == "done"
-			self.preferred_size = size
-			puts "Thank you for your selection"
+			if size.nil? == false
+				self.preferred_size = size
+				puts "Thank you for your selection"
+			else
+				puts "Thank you for your selection"
+			end
 			break 
 		elsif response.downcase == "quit"
 			puts "Goodbye"
