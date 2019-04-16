@@ -1,7 +1,7 @@
 require_relative '../config/environment'
 
+$user = nil
+
 welcome 
 
-dhall = Adopter.all[0]
-
-dhall.set_preferred_species
+$user.present_options

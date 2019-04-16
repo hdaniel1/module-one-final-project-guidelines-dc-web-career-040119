@@ -16,7 +16,7 @@ ActiveRecord::Schema.define(version: 5) do
     t.string "first_name"
     t.string "last_name"
     t.string "username"
-    t.string "prefered_species"
+    t.string "preferred_species"
     t.string "preferred_temperament"
     t.string "preferred_size"
     t.string "zip"

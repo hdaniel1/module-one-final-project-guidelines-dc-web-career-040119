@@ -1,4 +1,5 @@
 def welcome
+
 	puts "Welcome to [Insert placeholder name here]"
 	puts "Are you an existing user? Yes/No"
 	
@@ -6,11 +7,15 @@ def welcome
 	
 	response = gets.chomp
 	if response.downcase == "yes"
-		login	
+		login
 		break
 	elsif response.downcase == "no"
 		puts "Please create an account to continue"
 		create_account
+		puts "To help us help you, please follow the following prompts:"
+		$user.set_preferred_species
+		$user.set_preferred_temperament
+		$user.set_preferred_size
 		break
 	elsif response.downcase == "quit"
 		puts "Have a nice day!"
@@ -35,7 +40,10 @@ def create_account
 	if Adopter.find_by(username:username)
 		puts "We're sorry, that username already exists. Please try another"
 	else 
+		puts "Thanks for joining!"
 		Adopter.create(username: username, first_name: first_name, last_name: last_name)
+		# binding.pry
+		$user = Adopter.all.last
 		break
 	end
 	end
@@ -51,7 +59,8 @@ def login
 
 	if Adopter.find_by(username:response) 
 		puts "Welcome back!"
-		break
+		$user = Adopter.find_by(username:response)
+		break 
 	elsif response.downcase == "exit"
 		puts "Goodbye"
 		break
@@ -62,3 +71,5 @@ def login
 	end 
 
 end 
+
+
