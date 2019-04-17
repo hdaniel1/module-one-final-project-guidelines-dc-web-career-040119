@@ -202,7 +202,7 @@ class Adopter < ActiveRecord::Base
 
 		end #ends the loop
 	end
-	
+
 	#set preferred zip
 	def set_preferred_zip
 
@@ -234,22 +234,61 @@ class Adopter < ActiveRecord::Base
 		end #ends the loop
 	end 
 
-  def show_available_pets
-    self.preferred_species
-    self.preferred_temperament
-    self.preferred_size
+	def my_preferred_pets 
+		my_pets = Pet.all.select do |pet|
+    		pet.temperament == self.preferred_temperament.downcase && pet.size == self.preferred_size.downcase && pet.species == self.preferred_species.downcase && pet.available? == true && pet.shelter.zip == self.zip
+    	
+    	end
+	end 
 
-    where_statement = [
-      "species = ? and temperament = ? and size = ?",
-      self.preferred_species.downcase,
-      self.preferred_temperament.downcase,
-      self.preferred_size.downcase
-    ]
+  	def show_available_pets
+    	self.my_preferred_pets.each do |pet|
+    				print "Pet ID: "
+    				puts pet.id
+	    			print "Name: "
+	    			puts pet.name.nil? ? "N/A" : pet.name
+	    			print "Breed: "
+	    			puts pet.breed.nil? ? "N/A" : pet.breed
+	    			print "Age: "
+	    			puts pet.age.nil? ? "N/A" : pet.age
+	    			print "Misc: "
+	    			puts pet.miscellaneous .nil? ? "N/A" : pet.miscellaneous
+	    			print "Available? "
+	    			puts pet.available? .nil? ? "N/A" : pet.available?
+	    			print "Shelter: "
+	    			puts pet.shelter.name.nil? ? "N/A" : pet.shelter.name
+		    		67.times do print "*" end 
+		    		puts
+		    	
+		    end 
+		    self.favorite_pet
+    end 
 
-    p where_statement
-    p Pet.where(where_statement)
 
+  	def favorite_pet 
+  		puts "To favorite a pet, enter the pet's ID"
 
-  end
+  		loop do 
+  		response = gets.chomp 
+
+  		if FavoritePet.find_by(pet_id: response, adopter_id: self.id) 
+  			puts "You've already favorited #{FavoritePet.find_by(pet_id: response.to_i, adopter_id: self.id).pet.name} - please enter a different pet ID"
+  		elsif response.to_i == 0
+  			puts "Please enter a pet ID or type 'done' to return to the main menu"
+  		elsif response == "done"
+  			self.present_options 
+  		else 
+  			self.my_preferred_pets.each do |pet|
+  				if response.to_i == pet.id
+  					FavoritePet.find_or_create_by(pet_id: pet.id, adopter_id: self.id)
+  					puts "Thanks for considering #{pet.name}! To favorite another pet, enter it's ID or type 'done' to return to the main menu"
+  				else 
+  					puts "No pets with that ID were returned - please check again."
+  				end
+  			end 
+  		end 
+
+  		end 
+  	end 
 
 end
