@@ -39,6 +39,7 @@ class Adopter < ActiveRecord::Base
 		puts "1. Species - #{self.preferred_species}"
 		puts "2. Temperament - #{self.preferred_temperament}"
 		puts "3. Size - #{self.preferred_size}"
+		puts "4. Zip - #{self.zip}"
 		puts "To update your preferences, enter 'change'. Otherwise, enter 'exit' to return to the main menu"
 		self.change_preferences
 		self.save
@@ -52,6 +53,7 @@ class Adopter < ActiveRecord::Base
 			self.set_preferred_species
 			self.set_preferred_temperament
 			self.set_preferred_size
+			self.set_preferred_zip
 			self.present_options
 			break
 		elsif response =='exit'
@@ -96,7 +98,7 @@ class Adopter < ActiveRecord::Base
 
 	#logic for defining user response for preferred species
 	def parse_species
-    species = nil
+    	species = nil
 
 		loop do
 
@@ -200,6 +202,37 @@ class Adopter < ActiveRecord::Base
 
 		end #ends the loop
 	end
+	
+	#set preferred zip
+	def set_preferred_zip
+
+		puts "Your current zip is #{self.zip}. To change, please enter a new zip or type 'quit' to exit"
+
+		zip = nil
+		loop do
+
+		response = gets.chomp
+		#make sure response contains appropriate values
+		if response == "done"
+			if zip.nil? == false
+				self.zip = zip
+				puts "Thank you for your selection"
+			end 
+			break
+		elsif response.to_i == 0
+			puts "Please enter a valid zip or type 'quit' to exit"
+		elsif response.length != 5
+			puts "Please enter a valid zip or type 'quit' to exit"
+		elsif response.downcase == "done"
+			puts "Goodbye"
+			break
+		else
+			zip = response
+			puts "You chose #{zip}. If this is correct, enter 'done'. Otherwise, please re-enter your choice."
+		end
+
+		end #ends the loop
+	end 
 
   def show_available_pets
     self.preferred_species

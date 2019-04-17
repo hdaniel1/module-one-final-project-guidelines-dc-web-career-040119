@@ -1,9 +1,12 @@
 
 #starts the application
 def welcome
-
+	67.times do print "*" end
+	puts
 	puts "Welcome to [Insert placeholder name here]"
 	puts "Are you an existing user? Yes/No"
+	67.times do print "*" end 
+	puts
 
 	loop do
 
