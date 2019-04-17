@@ -1,59 +1,118 @@
-# Module One Final Project Guidelines
+# Module One Final Project - Animal Shelter Application
 
-Congratulations, you're at the end of module one! You've worked crazy hard to get here and have learned a ton.
+# Contributors
+-Dan Hallada
+-Matthew Lindsey
 
-For your final project, we'll be building a Command Line database application.
+# API Information
+ 
+https://userguide.rescuegroups.org/display/APIDG/HTTP+API+object+information+and+code+examples
 
-## Project Requirements
+# User Stories
+1. As a user, I want to log in and specify certain adoption preferences
+2. As a user, I want to see all available pets based on my preferences for shelters in my zip
+3. As a user, I want to favorite pets within my preferences to view later
+4. As a user, I want to adopt a pet(s) from my favorited pets
+5. As a user, I want to see all shelters in my area that offer volunteer work
+6. As a user, I want to sign up for volunteer work
+7. As a user, I want to see all events in my area
+8. As a user, I want to sign up for events in my area
 
-### Option One - Data Analytics Project
+# Object Models
+1. Adopter
+	-Attributes:
+		1. first_name - string, required
+		2. last_name - string, required
+		3. username - string, required
+		4. preferred_species - string, required
+		5. preferred_size - string, required
+		6. preferred_temperament - string, required
+		7. zip - string, required
+	-Methods:
+		1. See all Adopters
+		2. See all favorited pets
+		3. See my preferences by species
+		4. Edit my preferences
+		5. See my attended events
+		6. See my volunteer history
+2. Pet
+	-Attributes:
+		1. Name - string, optional
+		2. Breed - string, optional
+		3. Species - string, required
+		4. Size (small, medium, large) - string, required
+		5. Temperament (aggressive, sedentary, family-oriented) - string, required
+		6. Age - integer, required
+		7. Misc.(Special needs, diet, etc.) - string, optional
+		8. Available?  - boolean, required
+		9. Owner ID - integer, optional
+	-Methods:
+		1. See all pets
+		2. See all potential Adopters
+3. Shelter
+	-Attributes:
+		1. Name - string, required
+		2. Street - string, required
+		3. City - string, required
+		4. Zip - string, required
+		5. Volunteer? - boolean, optional
+	-Methods:
+		1. See all shelters
+		2. See all pets
+		3. See all available pets
+		4. See all adopted pets
+		5. See pets by breed
+		6. See all shelters that have volunteer work
+		7. See all events
+4. Area
+	-Attributes:
+		1. Zip - string, required
+		3. City, string, required
+	-Methods: 
+		1. See all areas
+		2. See all shelters in area
+		3. See all available pets???
+5. Event
+	-Attributes:
+		1. Shelter - integer, required
+		2. Location - string, required
+		3. Description - string, required
+		4. Start_time - datetime, required
+		5. End_time - datetime, required
+6. Favorited_Pets (J)
+	-Attributes:
+		1. Pet - integer, required
+		2. Adopter - integer, required
+7. Volunteer_Interest (J)
+	-Attributes:
+		1. Shelter - integer, required
+		2. Adopter - integer, required
+8. Event_attendance (J)
+	-Attributes:
+		1. Attended - boolean, optional
+		2. Event - integer, required
+		3. Adopter - integer, required
 
-1. Access a Sqlite3 Database using ActiveRecord.
-2. You should have at minimum three models including one join model. This means you must have a many-to-many relationship.
-3. You should seed your database using data that you collect either from a CSV, a website by scraping, or an API.
-4. Your models should have methods that answer interesting questions about the data. For example, if you've collected info about movie reviews, what is the most popular movie? What movie has the most reviews?
-5. You should provide a CLI to display the return values of your interesting methods.  
-6. Use good OO design patterns. You should have separate classes for your models and CLI interface.
 
-  **Resource:** [Easy Access APIs](https://github.com/learn-co-curriculum/easy-access-apis)
+# Object Relationships
+Shelter <> Pet = 1:N
+Area <> Shelter = 1:N
+Adopter <> Preferences 1:N
+Adopter <> Pet = N:N through favorited_pets
+Adopter <> Pet = 1:N (owning the pet)
+Adopter <> Shelter = N:N through volunteer table
+Adopter <> Event = N:N through event_attendance
 
-### Option Two - Command Line CRUD App
+# Flow
+1. Welcome page
+	-Existing user? 
+		If yes, prompt login - verify username against existing data
+		If no, create new adopter. Verify username against existing data to ensure does not exist already.
+2. Logged in, presented with homepage options
+	-Update preferences
+	-Browse available pets
+	-Adopt a pet
+	-See events in area / sign up
+	-Volunteer
 
-1. Access a Sqlite3 Database using ActiveRecord.
-2. You should have a minimum of three models.
-3. You should build out a CLI to give your user full CRUD ability for at least one of your resources. For example, build out a command line To-Do list. A user should be able to create a new to-do, see all todos, update a todo item, and delete a todo. Todos can be grouped into categories, so that a to-do has many categories and categories have many to-dos.
-4. Use good OO design patterns. You should have separate models for your runner and CLI interface.
 
-### Brainstorming and Proposing a Project Idea
-
-Projects need to be approved prior to launching into them, so take some time to brainstorm project options that will fulfill the requirements above.  You must have a minimum of four [user stories](https://en.wikipedia.org/wiki/User_story) to help explain how a user will interact with your app.  A user story should follow the general structure of `"As a <role>, I want <goal/desire> so that <benefit>"`. In example, if we were creating an app to randomly choose nearby restaurants on Yelp, we might write:
-
-* As a user, I want to be able to enter my name to retrieve my records
-* As a user, I want to enter a location and be given a random nearby restaurant suggestion
-* As a user, I should be able to reject a suggestion and not see that restaurant suggestion again
-* As a user, I want to be able to save to and retrieve a list of favorite restaurant suggestions
-
-## Instructions
-
-1. Fork and clone this repository.
-2. Build your application. Make sure to commit early and commit often. Commit messages should be meaningful (clearly describe what you're doing in the commit) and accurate (there should be nothing in the commit that doesn't match the description in the commit message). Good rule of thumb is to commit every 3-7 mins of actual coding time. Most of your commits should have under 15 lines of code and a 2 line commit is perfectly acceptable.
-3. Make sure to create a good README.md with a short description, install instructions, a contributors guide and a link to the license for your code.
-4. Make sure your project checks off each of the above requirements.
-5. Prepare a video demo (narration helps!) describing how a user would interact with your working project.
-    * The video should:
-      - Have an overview of your project.(2 minutes max)
-6. Prepare a presentation to follow your video.(3 minutes max)
-    * Your presentation should:
-      - Describe something you struggled to build, and show us how you ultimately implemented it in your code.
-      - Discuss 3 things you learned in the process of working on this project.
-      - Address, if anything, what you would change or add to what you have today?
-      - Present any code you would like to highlight.   
-7. *OPTIONAL, BUT RECOMMENDED*: Write a blog post about the project and process.
-
----
-### Common Questions:
-- How do I turn off my SQL logger?
-```ruby
-# in config/environment.rb add this line:
-ActiveRecord::Base.logger = nil
-```
