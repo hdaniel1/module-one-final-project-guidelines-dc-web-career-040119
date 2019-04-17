@@ -23,6 +23,7 @@ def welcome
 		$user.set_preferred_species
 		$user.set_preferred_temperament
 		$user.set_preferred_size
+		$user.set_preferred_zip
 		$user.present_options
 		break
 	elsif response.downcase == "quit"
