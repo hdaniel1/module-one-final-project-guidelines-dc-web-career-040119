@@ -1,0 +1,17 @@
+name,street,city,zip,volunteer?
+Melody,808 Northfield Terrace,Pittsburgh,15250,false
+Sheridan,7070 Hazelcrest Parkway,Pittsburgh,15250,true
+Caliangt,1 Blackbird Junction,Pittsburgh,15250,false
+Warbler,205 South Road,Columbus,43210,false
+Jackson,892 Golf View Crossing,Columbus,43210,false
+Laurel,402 Mosinee Pass,Columbus,43210,false
+Trailsway,9889 Logan Drive,Columbus,43210,true
+Southridge,515 La Follette Road,Jacksonville,32230,false
+Holmberg,0153 Paget Parkway,Jacksonville,32230,false
+Sauthoff,2751 Monterey Junction,Jacksonville,32230,true
+Moose,6 Walton Road,Jacksonville,32230,false
+Porter,4 North Way,Los Angeles,90010,false
+Memorial,82 Iowa Parkway,Los Angeles,90010,false
+Swallow,0 Oxford Way,Washington,20078,true
+Briar Crest,2 Dayton Road,Washington,20078,false
+Doe Crossing,92711 Loftsgordon Trail,Washington,20078,true
