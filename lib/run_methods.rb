@@ -11,10 +11,13 @@ def welcome
 	response = gets.chomp
 	if response.downcase == "yes"
 		login
-		$user.present_options
 		break
 	elsif response.downcase == "no"
+		67.times do print "*" end
+		puts
 		puts "Please create an account to continue"
+		67.times do print "*" end
+		puts
 		create_account
 		puts "To help us help you, please follow the following prompts:"
 		#go through preferences
@@ -31,6 +34,7 @@ def welcome
 	end
 
 	end
+
 end
 
 #go through account creation process
@@ -74,6 +78,7 @@ def login
 		$user = Adopter.find_by(username:response)
 		67.times do print "*" end 
 		puts
+		$user.present_options
 		break
 	elsif response.downcase == "exit"
 		puts "Goodbye"

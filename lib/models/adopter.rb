@@ -287,8 +287,8 @@ class Adopter < ActiveRecord::Base
 					if response.to_i == pet.id
 						FavoritePet.find_or_create_by(pet_id: pet.id, adopter_id: self.id)
 						puts "Thanks for considering #{pet.name}! To favorite another pet, enter it's ID or type 'done' to return to the main menu"
-					else 
-						puts "No pets with that ID were returned - please check again."
+					# else 
+					# 	puts "No pets with that ID were returned - please check again."
 					end
   				end 
   			end 
