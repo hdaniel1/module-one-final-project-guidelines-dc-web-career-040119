@@ -5,8 +5,6 @@ def welcome
 	puts
 	puts "Welcome to [Insert placeholder name here]"
 	puts "Are you an existing user? Yes/No"
-	67.times do print "*" end 
-	puts
 
 	loop do
 
@@ -61,16 +59,21 @@ end
 
 #search for exising username to log in with
 def login
-
-	puts "Please enter your username to log in "
+	67.times do print "*" end 
+	puts
+	puts "Please enter your username to log in: "
 
 	loop do
 
 	response = gets.chomp
 
 	if Adopter.find_by(username:response)
+		67.times do print "*" end 
+		puts
 		puts "Welcome back!"
 		$user = Adopter.find_by(username:response)
+		67.times do print "*" end 
+		puts
 		break
 	elsif response.downcase == "exit"
 		puts "Goodbye"

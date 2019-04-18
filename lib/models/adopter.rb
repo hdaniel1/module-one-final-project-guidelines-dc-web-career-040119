@@ -1,5 +1,5 @@
 
-class Adopter < ActiveRecord::Base
+class Adopter < ActiveRecord::Base 
 	has_many :favorite_pets
 	has_many :pets
 	has_many :pets, through: :favorite_pets
@@ -9,16 +9,21 @@ class Adopter < ActiveRecord::Base
 		"#{self.first_name} #{self.last_name}"
 	end
 
-	#present menu options
+
 	def present_options
-		puts "Hello #{self.full_name}"
+		puts "Hello #{self.full_name}!"
 		puts "What can we help you with today? Please enter the number corresponding with what you would like to do:"
+		67.times do print "*" end 
+		puts
 		puts "1. Review & Update Preferences"
 		puts "2. See available pets"
 		puts "3. View my favorite pets"
 		puts "4. Logout"
+		67.times do print "*" end 
+		puts
 		self.choose_menu_option
 	end
+
 
 	#menu options paths
 	def choose_menu_option
@@ -27,20 +32,26 @@ class Adopter < ActiveRecord::Base
 			self.show_preferences
     elsif response == "2"
       self.show_available_pets
-		elsif response == "4"
+    elsif response == "3"
+    	self.show_favorite_pets
+	elsif response == "4"
 			puts "Goodbye"
 			$user = nil
-		end
+	end
 	end
 
 	#shows user's existing preferences
 	def show_preferences
 		puts "Your preferences are as follows:"
+		67.times do print "*" end 
+		puts
 		puts "1. Species - #{self.preferred_species}"
 		puts "2. Temperament - #{self.preferred_temperament}"
 		puts "3. Size - #{self.preferred_size}"
 		puts "4. Zip - #{self.zip}"
-		puts "To update your preferences, enter 'change'. Otherwise, enter 'exit' to return to the main menu"
+		puts "To update your preferences, enter 'change'. Otherwise, enter 'quit' to return to the main menu"
+		67.times do print "*" end 
+		puts
 		self.change_preferences
 		self.save
 	end
@@ -56,7 +67,7 @@ class Adopter < ActiveRecord::Base
 			self.set_preferred_zip
 			self.present_options
 			break
-		elsif response =='exit'
+		elsif response =='quit'
 			self.present_options
 			break
 		else
@@ -69,19 +80,27 @@ class Adopter < ActiveRecord::Base
 	def set_preferred_species
 		puts "What type of animal are you looking for?"
 		puts "We offer the following species:"
+		67.times do print "*" end 
+		puts
 		puts "1. Dogs"
 		puts "2. Cats"
 		puts "3. Rabbits"
 		puts "Please enter the number corresponding to the species you're interested in"
+		67.times do print "*" end 
+		puts
 		self.parse_species
 	end
 
 	#wording for updating preferred_temperament
 	def set_preferred_temperament
 		puts "Please choose from one of the following temperaments"
+		67.times do print "*" end 
+		puts
 		puts "1. Outgoing"
 		puts "2. Quiet"
 		puts "3. Independent"
+		67.times do print "*" end 
+		puts
 		self.parse_temperament
 		self.save
 	end
@@ -89,9 +108,13 @@ class Adopter < ActiveRecord::Base
 	#wording for updating preferred_size
 	def set_preferred_size
 		puts "Please choose from one of the following sizes"
+		67.times do print "*" end 
+		puts
 		puts "1. Small"
 		puts "2. Medium"
 		puts "3. Large"
+		67.times do print "*" end 
+		puts
 		self.parse_size
 		self.save
 	end
@@ -106,13 +129,13 @@ class Adopter < ActiveRecord::Base
 		#make sure response contains appropriate values
 		if response == "1"
 			species = "dog"
-			puts "You chose #{species}. If this is correct, enter 'done'. Otherwise, please re-enter your choice."
+			puts "You chose '#{species}'. If this is correct, enter 'done'. Otherwise, please re-enter your choice."
 		elsif response == "2"
 			species = "cat"
-			puts "You chose #{species}. If this is correct, enter 'done'. Otherwise, please re-enter your choice."
+			puts "You chose '#{species}'. If this is correct, enter 'done'. Otherwise, please re-enter your choice."
 		elsif response == "3"
 			species = "rabbit"
-			puts "You chose #{species}. If this is correct, enter 'done'. Otherwise, please re-enter your choice."
+			puts "You chose '#{species}'. If this is correct, enter 'done'. Otherwise, please re-enter your choice."
 		elsif response == "done"
 			if species.nil? == false
 				self.preferred_species = species
@@ -123,6 +146,7 @@ class Adopter < ActiveRecord::Base
 			break
 		elsif response.downcase == "quit"
 			puts "Goodbye"
+			self.present_options
 			break
 		else
 			puts "Invalid response - to quit, type 'quit'"
@@ -159,6 +183,7 @@ class Adopter < ActiveRecord::Base
 			break
 		elsif response.downcase == "quit"
 			puts "Goodbye"
+			self.present_options
 			break
 		else
 			puts "Invalid response - to quit, type 'quit'"
@@ -195,6 +220,7 @@ class Adopter < ActiveRecord::Base
 			break
 		elsif response.downcase == "quit"
 			puts "Goodbye"
+			self.present_options
 			break
 		else
 			puts "Invalid response - to quit, type 'quit'"
@@ -225,6 +251,7 @@ class Adopter < ActiveRecord::Base
 			puts "Please enter a valid zip or type 'quit' to exit"
 		elsif response.downcase == "done"
 			puts "Goodbye"
+			self.present_options
 			break
 		else
 			zip = response
@@ -232,8 +259,9 @@ class Adopter < ActiveRecord::Base
 		end
 
 		end #ends the loop
-	end 
+	end 	
 
+	#gets pets based on preferences
 	def my_preferred_pets 
 		my_pets = Pet.all.select do |pet|
     		pet.temperament == self.preferred_temperament.downcase && pet.size == self.preferred_size.downcase && pet.species == self.preferred_species.downcase && pet.available? == true && pet.shelter.zip == self.zip
@@ -241,6 +269,7 @@ class Adopter < ActiveRecord::Base
     	end
 	end 
 
+	#shows pets based on preferences
   	def show_available_pets
     	self.my_preferred_pets.each do |pet|
     				print "Pet ID: "
@@ -264,10 +293,11 @@ class Adopter < ActiveRecord::Base
 		    self.favorite_pet
     end 
 
-
+    #lets the user favorite a pet from their preferences
   	def favorite_pet 
   		puts "To favorite a pet, enter the pet's ID"
-
+  		67.times do print "*" end 
+		puts
   		loop do 
   		response = gets.chomp 
 
@@ -291,4 +321,30 @@ class Adopter < ActiveRecord::Base
   		end 
   	end 
 
+  	def show_favorite_pets
+  		"Listed below are pets you have favorited: "
+  		67.times do print "*" end 
+		puts
+  		FavoritePet.all.each do |pet|
+  			if pet.adopter_id == id
+  				print "Pet ID: "
+    				puts pet.pet.id
+	    			print "Name: "
+	    			puts pet.pet.name.nil? ? "N/A" : pet.pet.name
+	    			print "Breed: "
+	    			puts pet.pet.breed.nil? ? "N/A" : pet.pet.breed
+	    			print "Age: "
+	    			puts pet.pet.age.nil? ? "N/A" : pet.pet.age
+	    			print "Misc: "
+	    			puts pet.pet.miscellaneous .nil? ? "N/A" : pet.pet.miscellaneous
+	    			print "Available? "
+	    			puts pet.pet.available? .nil? ? "N/A" : pet.pet.available?
+	    			print "Shelter: "
+	    			puts pet.pet.shelter.name.nil? ? "N/A" : pet.pet.shelter.name
+		    		67.times do print "*" end 
+		    		puts
+
+		    	end 
+		    end
+		end 
 end
