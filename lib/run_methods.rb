@@ -1,9 +1,5 @@
 
-#starts the application
 def welcome
-	67.times do print "*" end
-	puts
-	puts "Welcome to [Insert placeholder name here]"
 	puts "Are you an existing user? Yes/No"
 
 	loop do
@@ -13,19 +9,18 @@ def welcome
 		login
 		break
 	elsif response.downcase == "no"
+		puts
 		67.times do print "*" end
+		puts
+		puts
 		puts
 		puts "Please create an account to continue"
+		puts
 		67.times do print "*" end
 		puts
+		puts
+		puts
 		create_account
-		puts "To help us help you, please follow the following prompts:"
-		#go through preferences
-		$user.set_preferred_species
-		$user.set_preferred_temperament
-		$user.set_preferred_size
-		$user.set_preferred_zip
-		$user.present_options
 		break
 	elsif response.downcase == "quit"
 		puts "Have a nice day!"
@@ -56,6 +51,21 @@ def create_account
 		Adopter.create(username: username, first_name: first_name, last_name: last_name)
 		# binding.pry
 		$user = Adopter.all.last
+		puts
+		67.times do print "*" end
+		puts
+		puts
+		puts "To help us help you, please follow the following prompts:"
+		puts
+		67.times do print "*" end
+		puts
+		puts
+		#go through preferences
+		$user.set_preferred_species
+		$user.set_preferred_temperament
+		$user.set_preferred_size
+		$user.set_preferred_zip
+		$user.present_options
 		break
 	end
 	end
@@ -63,7 +73,9 @@ end
 
 #search for exising username to log in with
 def login
+	puts
 	67.times do print "*" end 
+	puts
 	puts
 	puts "Please enter your username to log in: "
 
@@ -72,11 +84,16 @@ def login
 	response = gets.chomp
 
 	if Adopter.find_by(username:response)
+		puts
 		67.times do print "*" end 
 		puts
+		puts
 		puts "Welcome back!"
+		puts
 		$user = Adopter.find_by(username:response)
+		puts
 		67.times do print "*" end 
+		puts
 		puts
 		$user.present_options
 		break

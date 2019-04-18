@@ -7,6 +7,12 @@ gem "sqlite3"
 gem "pry"
 gem "require_all"
 gem "byebug"
+gem "rspec"
+gem "tco"
+gem "rmagick", "~> 2.15", ">= 2.15.2"
+gem "catpix"
+gem "artii"
+
 # gem 'docopt', '~> 0.6.1'
 # gem 'tco', '~> 0.1.8'
 # gem 'ruby-terminfo', '~> 0.1.1'

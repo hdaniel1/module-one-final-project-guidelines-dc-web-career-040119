@@ -13,13 +13,17 @@ class Adopter < ActiveRecord::Base
 	def present_options
 		puts "Hello #{self.full_name}!"
 		puts "What can we help you with today? Please enter the number corresponding with what you would like to do:"
+		puts
 		67.times do print "*" end 
+		puts
 		puts
 		puts "1. Review & Update Preferences"
 		puts "2. See available pets"
 		puts "3. View my favorite pets / Adopt a pet"
 		puts "4. Logout"
+		puts
 		67.times do print "*" end 
+		puts
 		puts
 		self.choose_menu_option
 	end
@@ -43,14 +47,18 @@ class Adopter < ActiveRecord::Base
 	#shows user's existing preferences
 	def show_preferences
 		puts "Your preferences are as follows:"
+		puts
 		67.times do print "*" end 
+		puts
 		puts
 		puts "1. Species - #{self.preferred_species}"
 		puts "2. Temperament - #{self.preferred_temperament}"
 		puts "3. Size - #{self.preferred_size}"
 		puts "4. Zip - #{self.zip}"
 		puts "To update your preferences, enter 'change'. Otherwise, enter 'quit' to return to the main menu"
+		puts
 		67.times do print "*" end 
+		puts
 		puts
 		self.change_preferences
 		self.save
@@ -80,13 +88,13 @@ class Adopter < ActiveRecord::Base
 	def set_preferred_species
 		puts "What type of animal are you looking for?"
 		puts "We offer the following species:"
-		67.times do print "*" end 
-		puts
 		puts "1. Dogs"
 		puts "2. Cats"
 		puts "3. Rabbits"
 		puts "Please enter the number corresponding to the species you're interested in"
+		puts
 		67.times do print "*" end 
+		puts
 		puts
 		self.parse_species
 		self.save
@@ -94,13 +102,17 @@ class Adopter < ActiveRecord::Base
 
 	#wording for updating preferred_temperament
 	def set_preferred_temperament
-		puts "Please choose from one of the following temperaments"
+		puts "Please choose from one of the following temperaments:"
+		puts
 		67.times do print "*" end 
+		puts
 		puts
 		puts "1. Outgoing"
 		puts "2. Quiet"
 		puts "3. Independent"
+		puts
 		67.times do print "*" end 
+		puts
 		puts
 		self.parse_temperament
 		self.save
@@ -108,13 +120,17 @@ class Adopter < ActiveRecord::Base
 
 	#wording for updating preferred_size
 	def set_preferred_size
-		puts "Please choose from one of the following sizes"
+		puts "Please choose from one of the following sizes:"
+		puts
 		67.times do print "*" end 
+		puts
 		puts
 		puts "1. Small"
 		puts "2. Medium"
 		puts "3. Large"
+		puts
 		67.times do print "*" end 
+		puts
 		puts
 		self.parse_size
 		self.save
@@ -129,26 +145,54 @@ class Adopter < ActiveRecord::Base
 			if response == "1"
 				species = "dog"
 				puts "You chose '#{species}'. If this is correct, enter 'done'. Otherwise, please re-enter your choice."
+				puts
+				67.times do print "*" end
+				puts
+				puts
 			elsif response == "2"
 				species = "cat"
 				puts "You chose '#{species}'. If this is correct, enter 'done'. Otherwise, please re-enter your choice."
+				puts
+				67.times do print "*" end
+				puts
+				puts
 			elsif response == "3"
 				species = "rabbit"
 				puts "You chose '#{species}'. If this is correct, enter 'done'. Otherwise, please re-enter your choice."
+				puts
+				67.times do print "*" end
+				puts
+				puts
 			elsif response == "done"
 				if species.nil? == false
 					self.preferred_species = species
 					puts "Thank you for your selection"
+					puts
+					67.times do print "*" end
+					puts
+					puts
 				else
 					puts "Thank you for your selection"
+					puts
+					67.times do print "*" end
+					puts
+					puts
 				end
 				break
 			elsif response.downcase == "quit"
 				puts "Goodbye"
+				puts
+				67.times do print "*" end
+				puts
+				puts
 				self.present_options
 				break
 			else
 				puts "Invalid response - to quit, type 'quit'"
+				puts
+				67.times do print "*" end
+				puts
+				puts
 			end
 		end #ends the loop
 	end
@@ -162,26 +206,53 @@ class Adopter < ActiveRecord::Base
 			if response == "1"
 				temperament = "Outgoing"
 				puts "You chose #{temperament}. If this is correct, enter 'done'. Otherwise, please re-enter your choice."
+				puts
+				67.times do print "*" end
+				puts
+				puts
 			elsif response == "2"
 				temperament = "Quiet"
 				puts "You chose #{temperament}. If this is correct, enter 'done'. Otherwise, please re-enter your choice."
+				puts
+				67.times do print "*" end
+				puts
+				puts
 			elsif response == "3"
 				temperament = "Independent"
 				puts "You chose #{temperament}. If this is correct, enter 'done'. Otherwise, please re-enter your choice."
+				puts
+				67.times do print "*" end
+				puts
+				puts
 			elsif response == "done"
 				if temperament.nil? == false
 					self.preferred_temperament = temperament
 					puts "Thank you for your selection"
+					67.times do print "*" end
+					puts
+					puts
 				else
 					puts "Thank you for your selection"
+					puts
+					67.times do print "*" end
+					puts
+					puts
 				end
 				break
 			elsif response.downcase == "quit"
 				puts "Goodbye"
 				self.present_options
+				puts
+				67.times do print "*" end
+				puts
+				puts
 				break
 			else
 				puts "Invalid response - to quit, type 'quit'"
+				puts
+				67.times do print "*" end
+				puts
+				puts
 			end
 		end #ends the loop
 	end
@@ -195,26 +266,54 @@ class Adopter < ActiveRecord::Base
 			if response == "1"
 				size = "Small"
 				puts "You chose #{size}. If this is correct, enter 'done'. Otherwise, please re-enter your choice."
+				puts
+				67.times do print "*" end
+				puts
+				puts
 			elsif response == "2"
 				size = "Medium"
 				puts "You chose #{size}. If this is correct, enter 'done'. Otherwise, please re-enter your choice."
+				puts
+				67.times do print "*" end
+				puts
+				puts
 			elsif response == "3"
 				size = "Large"
 				puts "You chose #{size}. If this is correct, enter 'done'. Otherwise, please re-enter your choice."
+				puts
+				67.times do print "*" end
+				puts
+				puts
 			elsif response == "done"
 				if size.nil? == false
 					self.preferred_size = size
 					puts "Thank you for your selection"
+					puts
+					67.times do print "*" end
+					puts
+					puts
 				else
 					puts "Thank you for your selection"
+					puts
+					67.times do print "*" end
+					puts
+					puts
 				end
 				break
 			elsif response.downcase == "quit"
 				puts "Goodbye"
+				puts
+				67.times do print "*" end
+				puts
+				puts
 				self.present_options
 				break
 			else
 				puts "Invalid response - to quit, type 'quit'"
+				puts
+				67.times do print "*" end
+				puts
+				puts
 			end
 		end #ends the loop
 	end
@@ -231,19 +330,39 @@ class Adopter < ActiveRecord::Base
 					self.zip = zip
 					self.save
 					puts "Thank you for your selection"
+					puts
+					67.times do print "*" end
+					puts
+					puts
 				end 
 				break
 			elsif response.to_i == 0
 				puts "Please enter a valid zip or type 'quit' to exit"
+				puts
+				67.times do print "*" end
+				puts
+				puts
 			elsif response.length != 5
 				puts "Please enter a valid zip or type 'quit' to exit"
+				puts
+				67.times do print "*" end
+				puts
+				puts
 			elsif response.downcase == "done"
 				puts "Goodbye"
+				puts
+				67.times do print "*" end
+				puts
+				puts
 				self.present_options
 				break
 			else
 				zip = response
 				puts "You chose #{zip}. If this is correct, enter 'done'. Otherwise, please re-enter your choice."
+				puts
+				67.times do print "*" end
+				puts
+				puts
 			end
 		end #ends the loop
 	end 	
@@ -270,7 +389,9 @@ class Adopter < ActiveRecord::Base
     #lets the user favorite a pet from their preferences
   	def favorite_pet 
   		puts "To favorite a pet, enter the pet's ID"
+  		puts
   		67.times do print "*" end 
+		puts
 		puts
 
   		loop do 
@@ -328,7 +449,9 @@ class Adopter < ActiveRecord::Base
   	#list my favorite pets
   	def show_favorite_pets
   		"Listed below are pets you have favorited: "
+  		puts
   		67.times do print "*" end 
+		puts
 		puts
   		FavoritePet.all.each do |pet|
   			if pet.adopter_id == self.id
