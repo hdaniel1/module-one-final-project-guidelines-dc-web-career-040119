@@ -436,8 +436,6 @@ class Adopter < ActiveRecord::Base
 						puts "Congratulations - you've adopted #{pet.pet.name}! They will be removed from your favorites."
 						FavoritePet.destroy(pet.id)
 						self.present_options
-					else
-						puts "you are here"
 					end 
 				end
 			end 

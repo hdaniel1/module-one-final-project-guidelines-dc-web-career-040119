@@ -1,3 +1,15 @@
+require 'artii'
+
+$user = nil
+def introduce
+	125.times do print "*" end
+	puts
+	a = Artii::Base.new
+	a.asciify('word') 
+	puts a.asciify('Welcome to Pets R US!') 
+	125.times do print "*" end
+	puts
+end
 
 def welcome
 	puts "Are you an existing user? Yes/No"
