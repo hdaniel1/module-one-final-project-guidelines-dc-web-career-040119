@@ -17,7 +17,7 @@ class Adopter < ActiveRecord::Base
 		puts
 		puts "1. Review & Update Preferences"
 		puts "2. See available pets"
-		puts "3. View my favorite pets"
+		puts "3. View my favorite pets / Adopt a pet"
 		puts "4. Logout"
 		67.times do print "*" end 
 		puts
@@ -30,14 +30,14 @@ class Adopter < ActiveRecord::Base
 		response = gets.chomp
 		if response == "1"
 			self.show_preferences
-    elsif response == "2"
-      self.show_available_pets
-    elsif response == "3"
-    	self.show_favorite_pets
-	elsif response == "4"
+    	elsif response == "2"
+     		self.show_available_pets
+    	elsif response == "3"
+    		self.show_favorite_pets
+		elsif response == "4"
 			puts "Goodbye"
 			$user = nil
-	end
+		end
 	end
 
 	#shows user's existing preferences
@@ -60,19 +60,19 @@ class Adopter < ActiveRecord::Base
 	def change_preferences
 		loop do
 		response = gets.chomp
-		if response == "change"
-			self.set_preferred_species
-			self.set_preferred_temperament
-			self.set_preferred_size
-			self.set_preferred_zip
-			self.present_options
-			break
-		elsif response =='quit'
-			self.present_options
-			break
-		else
-			puts "Please enter a valid response"
-		end
+			if response == "change"
+				self.set_preferred_species
+				self.set_preferred_temperament
+				self.set_preferred_size
+				self.set_preferred_zip
+				self.present_options
+				break
+			elsif response =='quit'
+				self.present_options
+				break
+			else
+				puts "Please enter a valid response"
+			end
 		end
 	end
 
@@ -89,6 +89,7 @@ class Adopter < ActiveRecord::Base
 		67.times do print "*" end 
 		puts
 		self.parse_species
+		self.save
 	end
 
 	#wording for updating preferred_temperament
@@ -122,175 +123,148 @@ class Adopter < ActiveRecord::Base
 	#logic for defining user response for preferred species
 	def parse_species
     	species = nil
-
 		loop do
-
 		response = gets.chomp
 		#make sure response contains appropriate values
-		if response == "1"
-			species = "dog"
-			puts "You chose '#{species}'. If this is correct, enter 'done'. Otherwise, please re-enter your choice."
-		elsif response == "2"
-			species = "cat"
-			puts "You chose '#{species}'. If this is correct, enter 'done'. Otherwise, please re-enter your choice."
-		elsif response == "3"
-			species = "rabbit"
-			puts "You chose '#{species}'. If this is correct, enter 'done'. Otherwise, please re-enter your choice."
-		elsif response == "done"
-			if species.nil? == false
-				self.preferred_species = species
-				puts "Thank you for your selection"
+			if response == "1"
+				species = "dog"
+				puts "You chose '#{species}'. If this is correct, enter 'done'. Otherwise, please re-enter your choice."
+			elsif response == "2"
+				species = "cat"
+				puts "You chose '#{species}'. If this is correct, enter 'done'. Otherwise, please re-enter your choice."
+			elsif response == "3"
+				species = "rabbit"
+				puts "You chose '#{species}'. If this is correct, enter 'done'. Otherwise, please re-enter your choice."
+			elsif response == "done"
+				if species.nil? == false
+					self.preferred_species = species
+					puts "Thank you for your selection"
+				else
+					puts "Thank you for your selection"
+				end
+				break
+			elsif response.downcase == "quit"
+				puts "Goodbye"
+				self.present_options
+				break
 			else
-				puts "Thank you for your selection"
+				puts "Invalid response - to quit, type 'quit'"
 			end
-			break
-		elsif response.downcase == "quit"
-			puts "Goodbye"
-			self.present_options
-			break
-		else
-			puts "Invalid response - to quit, type 'quit'"
-		end
-
 		end #ends the loop
 	end
 
 	#logic for defining user response for preferred temperament
 	def parse_temperament
-
 		temperament = nil
-
 		loop do
-
 		response = gets.chomp
 		#make sure response contains appropriate values
-		if response == "1"
-			temperament = "Outgoing"
-			puts "You chose #{temperament}. If this is correct, enter 'done'. Otherwise, please re-enter your choice."
-		elsif response == "2"
-			temperament = "Quiet"
-			puts "You chose #{temperament}. If this is correct, enter 'done'. Otherwise, please re-enter your choice."
-		elsif response == "3"
-			temperament = "Independent"
-			puts "You chose #{temperament}. If this is correct, enter 'done'. Otherwise, please re-enter your choice."
-		elsif response == "done"
-			if temperament.nil? == false
-				self.preferred_temperament = temperament
-				puts "Thank you for your selection"
+			if response == "1"
+				temperament = "Outgoing"
+				puts "You chose #{temperament}. If this is correct, enter 'done'. Otherwise, please re-enter your choice."
+			elsif response == "2"
+				temperament = "Quiet"
+				puts "You chose #{temperament}. If this is correct, enter 'done'. Otherwise, please re-enter your choice."
+			elsif response == "3"
+				temperament = "Independent"
+				puts "You chose #{temperament}. If this is correct, enter 'done'. Otherwise, please re-enter your choice."
+			elsif response == "done"
+				if temperament.nil? == false
+					self.preferred_temperament = temperament
+					puts "Thank you for your selection"
+				else
+					puts "Thank you for your selection"
+				end
+				break
+			elsif response.downcase == "quit"
+				puts "Goodbye"
+				self.present_options
+				break
 			else
-				puts "Thank you for your selection"
+				puts "Invalid response - to quit, type 'quit'"
 			end
-			break
-		elsif response.downcase == "quit"
-			puts "Goodbye"
-			self.present_options
-			break
-		else
-			puts "Invalid response - to quit, type 'quit'"
-		end
-
 		end #ends the loop
 	end
 
 	#logic for defining user response for preferred size
 	def parse_size
-
 		size = nil
-
 		loop do
-
 		response = gets.chomp
 		#make sure response contains appropriate values
-		if response == "1"
-			size = "Small"
-			puts "You chose #{size}. If this is correct, enter 'done'. Otherwise, please re-enter your choice."
-		elsif response == "2"
-			size = "Medium"
-			puts "You chose #{size}. If this is correct, enter 'done'. Otherwise, please re-enter your choice."
-		elsif response == "3"
-			size = "Large"
-			puts "You chose #{size}. If this is correct, enter 'done'. Otherwise, please re-enter your choice."
-		elsif response == "done"
-			if size.nil? == false
-				self.preferred_size = size
-				puts "Thank you for your selection"
+			if response == "1"
+				size = "Small"
+				puts "You chose #{size}. If this is correct, enter 'done'. Otherwise, please re-enter your choice."
+			elsif response == "2"
+				size = "Medium"
+				puts "You chose #{size}. If this is correct, enter 'done'. Otherwise, please re-enter your choice."
+			elsif response == "3"
+				size = "Large"
+				puts "You chose #{size}. If this is correct, enter 'done'. Otherwise, please re-enter your choice."
+			elsif response == "done"
+				if size.nil? == false
+					self.preferred_size = size
+					puts "Thank you for your selection"
+				else
+					puts "Thank you for your selection"
+				end
+				break
+			elsif response.downcase == "quit"
+				puts "Goodbye"
+				self.present_options
+				break
 			else
-				puts "Thank you for your selection"
+				puts "Invalid response - to quit, type 'quit'"
 			end
-			break
-		elsif response.downcase == "quit"
-			puts "Goodbye"
-			self.present_options
-			break
-		else
-			puts "Invalid response - to quit, type 'quit'"
-		end
-
 		end #ends the loop
 	end
 
 	#set preferred zip
 	def set_preferred_zip
-
 		puts "Your current zip is #{self.zip}. To change, please enter a new zip or type 'quit' to exit"
-
 		zip = nil
 		loop do
-
 		response = gets.chomp
 		#make sure response contains appropriate values
-		if response == "done"
-			if zip.nil? == false
-				self.zip = zip
-				puts "Thank you for your selection"
-			end 
-			break
-		elsif response.to_i == 0
-			puts "Please enter a valid zip or type 'quit' to exit"
-		elsif response.length != 5
-			puts "Please enter a valid zip or type 'quit' to exit"
-		elsif response.downcase == "done"
-			puts "Goodbye"
-			self.present_options
-			break
-		else
-			zip = response
-			puts "You chose #{zip}. If this is correct, enter 'done'. Otherwise, please re-enter your choice."
-		end
-
+			if response == "done"
+				if zip.nil? == false
+					self.zip = zip
+					self.save
+					puts "Thank you for your selection"
+				end 
+				break
+			elsif response.to_i == 0
+				puts "Please enter a valid zip or type 'quit' to exit"
+			elsif response.length != 5
+				puts "Please enter a valid zip or type 'quit' to exit"
+			elsif response.downcase == "done"
+				puts "Goodbye"
+				self.present_options
+				break
+			else
+				zip = response
+				puts "You chose #{zip}. If this is correct, enter 'done'. Otherwise, please re-enter your choice."
+			end
 		end #ends the loop
 	end 	
 
 	#gets pets based on preferences
 	def my_preferred_pets 
 		my_pets = Pet.all.select do |pet|
-    		pet.temperament == self.preferred_temperament.downcase && pet.size == self.preferred_size.downcase && pet.species == self.preferred_species.downcase && pet.available? == true && pet.shelter.zip == self.zip
-    	
+    		pet.temperament == self.preferred_temperament.downcase && 
+    		pet.size == self.preferred_size.downcase && 
+    		pet.species == self.preferred_species.downcase && 
+    		pet.available == true && 
+    		pet.shelter.zip == self.zip
     	end
 	end 
 
 	#shows pets based on preferences
   	def show_available_pets
     	self.my_preferred_pets.each do |pet|
-    				print "Pet ID: "
-    				puts pet.id
-	    			print "Name: "
-	    			puts pet.name.nil? ? "N/A" : pet.name
-	    			print "Breed: "
-	    			puts pet.breed.nil? ? "N/A" : pet.breed
-	    			print "Age: "
-	    			puts pet.age.nil? ? "N/A" : pet.age
-	    			print "Misc: "
-	    			puts pet.miscellaneous .nil? ? "N/A" : pet.miscellaneous
-	    			print "Available? "
-	    			puts pet.available? .nil? ? "N/A" : pet.available?
-	    			print "Shelter: "
-	    			puts pet.shelter.name.nil? ? "N/A" : pet.shelter.name
-		    		67.times do print "*" end 
-		    		puts
-		    	
-		    end 
-		    self.favorite_pet
+    		pet.show_pet_info    	
+		end 
+		self.favorite_pet
     end 
 
     #lets the user favorite a pet from their preferences
@@ -298,53 +272,69 @@ class Adopter < ActiveRecord::Base
   		puts "To favorite a pet, enter the pet's ID"
   		67.times do print "*" end 
 		puts
+
   		loop do 
   		response = gets.chomp 
 
-  		if FavoritePet.find_by(pet_id: response, adopter_id: self.id) 
-  			puts "You've already favorited #{FavoritePet.find_by(pet_id: response.to_i, adopter_id: self.id).pet.name} - please enter a different pet ID"
-  		elsif response.to_i == 0
-  			puts "Please enter a pet ID or type 'done' to return to the main menu"
-  		elsif response == "done"
-  			self.present_options 
-  		else 
-  			self.my_preferred_pets.each do |pet|
-  				if response.to_i == pet.id
-  					FavoritePet.find_or_create_by(pet_id: pet.id, adopter_id: self.id)
-  					puts "Thanks for considering #{pet.name}! To favorite another pet, enter it's ID or type 'done' to return to the main menu"
-  				else 
-  					puts "No pets with that ID were returned - please check again."
-  				end
+			if FavoritePet.find_by(pet_id: response, adopter_id: self.id) 
+				puts "You've already favorited #{FavoritePet.find_by(pet_id: response.to_i, adopter_id: self.id).pet.name} - please enter a different pet ID"
+			elsif response == "done"
+				self.present_options 
+			elsif response.to_i == 0
+				puts "Please enter a pet ID or type 'done' to return to the main menu"
+			else 
+				self.my_preferred_pets.each do |pet|
+					if response.to_i == pet.id
+						FavoritePet.find_or_create_by(pet_id: pet.id, adopter_id: self.id)
+						puts "Thanks for considering #{pet.name}! To favorite another pet, enter it's ID or type 'done' to return to the main menu"
+					else 
+						puts "No pets with that ID were returned - please check again."
+					end
+  				end 
   			end 
-  		end 
+		end #ends the loop
+	end 
 
-  		end 
+	def adopt_a_pet
+		puts "To adopt a pet, enter the pet's ID. To go back to the main menu, enter 'done'"
+
+  		response = ''
+  		while response != "done"
+  			response = gets.chomp
+
+			if response.to_i == 0
+				puts "Please enter a valid response or type 'done' to return to the main menu"
+			else
+				self.favorite_pets.each do |pet|
+					# binding.pry
+					
+					if pet.pet_id == response.to_i
+						pet.pet.available = false
+						pet.pet.owner_id = self.id
+						pet.pet.save
+						puts "Congratulations - you've adopted #{pet.pet.name}! They will be removed from your favorites."
+						FavoritePet.destroy(pet.id)
+						self.present_options
+					else
+						puts "you are here"
+					end 
+				end
+			end 
+
+		end #ends the loop
+		self.present_options
   	end 
-
+	
+  	#list my favorite pets
   	def show_favorite_pets
   		"Listed below are pets you have favorited: "
   		67.times do print "*" end 
 		puts
   		FavoritePet.all.each do |pet|
-  			if pet.adopter_id == id
-  				print "Pet ID: "
-    				puts pet.pet.id
-	    			print "Name: "
-	    			puts pet.pet.name.nil? ? "N/A" : pet.pet.name
-	    			print "Breed: "
-	    			puts pet.pet.breed.nil? ? "N/A" : pet.pet.breed
-	    			print "Age: "
-	    			puts pet.pet.age.nil? ? "N/A" : pet.pet.age
-	    			print "Misc: "
-	    			puts pet.pet.miscellaneous .nil? ? "N/A" : pet.pet.miscellaneous
-	    			print "Available? "
-	    			puts pet.pet.available? .nil? ? "N/A" : pet.pet.available?
-	    			print "Shelter: "
-	    			puts pet.pet.shelter.name.nil? ? "N/A" : pet.pet.shelter.name
-		    		67.times do print "*" end 
-		    		puts
-
-		    	end 
-		    end
-		end 
+  			if pet.adopter_id == self.id
+  				pet.pet.show_pet_info
+		    end 
+		end
+		self.adopt_a_pet
+	end 
 end
