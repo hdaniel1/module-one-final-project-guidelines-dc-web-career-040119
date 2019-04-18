@@ -226,12 +226,14 @@ class Adopter < ActiveRecord::Base
     conditions = 'pets.species = :species and '\
                'pets.temperament = :temperament and '\
                'pets.size = :size and '\
+               'pets.available = :available and '\
                'shelters.zip'
 
     named_params = {
       species: self.preferred_species.downcase,
       temperament: self.preferred_temperament.downcase,
       size: self.preferred_size.downcase,
+      available: true,
       zip: self.zip
     }
 
@@ -255,9 +257,6 @@ class Adopter < ActiveRecord::Base
 
     # p result = results.first
     # p result.shelter.name
-
-
-
 
     # p Pet.joins(:shelter).where(statement, named_params)
 

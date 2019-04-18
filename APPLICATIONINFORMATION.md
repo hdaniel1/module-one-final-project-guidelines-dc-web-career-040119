@@ -5,7 +5,7 @@
 -Matthew Lindsey
 
 # API Information
- 
+
 https://userguide.rescuegroups.org/display/APIDG/HTTP+API+object+information+and+code+examples
 
 # User Stories
@@ -55,7 +55,7 @@ https://userguide.rescuegroups.org/display/APIDG/HTTP+API+object+information+and
 		2. Street - string, required
 		3. City - string, required
 		4. Zip - string, required
-		5. Volunteer? - boolean, optional
+		5. Volunteer - boolean, optional
 	-Methods:
 		1. See all shelters
 		2. See all pets
@@ -68,7 +68,7 @@ https://userguide.rescuegroups.org/display/APIDG/HTTP+API+object+information+and
 	-Attributes:
 		1. Zip - string, required
 		3. City, string, required
-	-Methods: 
+	-Methods:
 		1. See all areas
 		2. See all shelters in area
 		3. See all available pets???
@@ -105,7 +105,7 @@ Adopter <> Event = N:N through event_attendance
 
 # Flow
 1. Welcome page
-	-Existing user? 
+	-Existing user?
 		If yes, prompt login - verify username against existing data
 		If no, create new adopter. Verify username against existing data to ensure does not exist already.
 2. Logged in, presented with homepage options
@@ -113,6 +113,4 @@ Adopter <> Event = N:N through event_attendance
 	-Browse available pets
 	-Adopt a pet
 	-See events in area / sign up
-	-Volunteer
-
-
+	-Volunteering

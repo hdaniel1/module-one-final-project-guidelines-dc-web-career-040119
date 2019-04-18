@@ -1,6 +1,6 @@
-class CreateAdopter < ActiveRecord::Migration
+class CreateAdopter < ActiveRecord::Migration[4.2]
 
-	def change 
+	def change
 		create_table :adopters do |t|
 			t.string :first_name
 			t.string :last_name
@@ -9,6 +9,6 @@ class CreateAdopter < ActiveRecord::Migration
 			t.string :preferred_temperament
 			t.string :preferred_size
 			t.string :zip
-		end 
-	end 
-end 
+		end
+	end
+end

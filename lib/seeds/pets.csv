@@ -1,4 +1,4 @@
-name,species,breed,temperament,size,age,miscellaneous,available?,shelter_id
+name,species,breed,temperament,size,age,miscellaneous,available,shelter_id
 Alex,rabbit,,independent,small,7,,true,9
 Angel,dog,,quiet,medium,13,,true,10
 Baby,cat,,outgoing,large,16,,true,14

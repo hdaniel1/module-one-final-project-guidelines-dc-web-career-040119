@@ -1,6 +1,6 @@
-class CreatePet < ActiveRecord::Migration
+class CreatePet < ActiveRecord::Migration[4.2]
 
-	def change 
+	def change
 		create_table :pets do |t|
 			t.string :name
 			t.string :breed
@@ -9,9 +9,9 @@ class CreatePet < ActiveRecord::Migration
 			t.string :size
 			t.integer :age
 			t.string :miscellaneous
-			t.boolean :available?
+			t.boolean :available
 			t.integer :owner_id
 			t.integer :shelter_id
-		end 
-	end 
-end 
+		end
+	end
+end

@@ -12,7 +12,7 @@ MUST DO
 
 EXTRA
 
-1. Adopt a pet from favorite_pets. Set pet owner_id = adopter_id. Adopter can adopt multiple pets, pet has one owner. 
-2. Volunteer? 
+1. Adopt a pet from favorite_pets. Set pet owner_id = adopter_id. Adopter can adopt multiple pets, pet has one owner.
+2. Volunteering?
 3. Events?
 4. Make it pretty
