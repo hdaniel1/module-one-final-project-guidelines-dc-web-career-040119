@@ -11,22 +11,35 @@ describe 'user' do
 end
 
 describe 'Adopter' do
- 	let(:stella) { Adopter.create(first_name: 'Stella', last_name: "Artois", preferred_species: "Dog", preferred_size: "Small", preferred_temperament: "Quiet", zip: 25252) }
-  	let(:blanche) { Adopter.create(first_name: "Carte", last_name: 'Blanche', preferred_species: "Cat", preferred_size: "Small", preferred_temperament: "Independent", zip: 15151) }
+ 	let(:stella) { Adopter.find_or_create_by(first_name: 'Stella', last_name: "Artois", preferred_species: "Dog", preferred_size: "Small", preferred_temperament: "Quiet", zip: 25252) }
+  	let(:blanche) { Adopter.find_or_create_by(first_name: "Carte", last_name: 'Blanche', preferred_species: "Cat", preferred_size: "Small", preferred_temperament: "Independent", zip: 15151) }
 
   	describe 'Shelter' do
-	  let(:pound) {Shelter.create(name:"The Pound", zip: 25252)}
-	  let(:hra) {Shelter.create(name:"Humane Rescue Alliance", zip: 15151)}
+	  let(:pound) {Shelter.find_or_create_by(name:"The Pound", zip: 25252)}
+	  let(:hra) {Shelter.find_or_create_by(name:"Humane Rescue Alliance", zip: 15151)}
 
   	describe 'Pet' do 
-	 	let(:buddy) { Pet.create(name: 'Buddy', species: "Dog", breed: "Cairne Terrier", temperament: "Quiet", age: 13, size: "Small", miscellaneous: "Likes chewies", owner_id: nil, available: true, shelter: hra) }
-	 	let(:grizz) { Pet.create(name: 'Grizabella', species: "Cat", breed: "Maine Coon", temperament: "Outgoing", age: 2, size: "Medium", miscellaneous: "Smells bad", owner_id: nil, available: true, shelter: pound) }
-	 	let(:basil) { Pet.create(name: 'Basil', species: "Rabbit", breed: "Stag Hare", temperament: "Independent", age: 4, size: "Large", miscellaneous: "Likes to fight", owner_id: nil, available: true, shelter: hra) }
-	 	let(:penny) { Pet.create(name: 'Penny', species: "Cat", breed: "Tortoiseshell", temperament: "Independent", age: 3, size: "Small", miscellaneous: "Fond of sunlight", owner_id: nil, available: false, shelter: pound) }
+	 	let(:buddy) { Pet.find_or_create_by(name: 'Buddy', species: "Dog", breed: "Cairne Terrier", temperament: "Quiet", age: 13, size: "Small", miscellaneous: "Likes chewies", owner_id: nil, available: true, shelter: pound) }
+	 	let(:grizz) { Pet.find_or_create_by(name: 'Grizabella', species: "Cat", breed: "Maine Coon", temperament: "Outgoing", age: 2, size: "Medium", miscellaneous: "Smells bad", owner_id: nil, available: true, shelter: pound) }
+	 	let(:basil) { Pet.find_or_create_by(name: 'Basil', species: "Rabbit", breed: "Stag Hare", temperament: "Independent", age: 4, size: "Large", miscellaneous: "Likes to fight", owner_id: nil, available: true, shelter: hra) }
+	 	let(:penny) { Pet.find_or_create_by(name: 'Penny', species: "Cat", breed: "Tortoiseshell", temperament: "Independent", age: 3, size: "Small", miscellaneous: "Fond of sunlight", owner_id: nil, available: false, shelter: pound) }
+	 	let(:fido) { Pet.find_or_create_by(name: 'Fido', species: "Dog", breed: "Daschund", temperament: "Quiet", age: 5, size: "Small", miscellaneous: "Barks at nothing", owner_id: nil, available: false, shelter: pound) }
 
+	 # 	it "checks that I can update my preferences" do
+
+		# end
 	 	it "checks preferred pets match preferences" do 
 	 		expect(stella.my_preferred_pets).to include(buddy)
 	 	end
+
+	 	it "checks non-preferred pets don't appear in favorites" do 
+	 		expect(stella.my_preferred_pets).to_not include(grizz)
+	 	end
+
+	 	it "checks non-available pets don't appear in favorites" do 
+	 		expect(stella.my_preferred_pets).to_not include(fido)
+	 	end
+
 	 end 
  	end
 end

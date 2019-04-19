@@ -373,9 +373,9 @@ class Adopter < ActiveRecord::Base
 	#gets pets based on preferences
 	def my_preferred_pets 
 		my_pets = Pet.all.select do |pet|
-    		pet.temperament == self.preferred_temperament.downcase && 
-    		pet.size == self.preferred_size.downcase && 
-    		pet.species == self.preferred_species.downcase && 
+    		pet.temperament.downcase == self.preferred_temperament.downcase && 
+    		pet.size.downcase == self.preferred_size.downcase && 
+    		pet.species.downcase == self.preferred_species.downcase && 
     		pet.available == true && 
     		pet.shelter.zip == self.zip
     	end
@@ -439,15 +439,16 @@ class Adopter < ActiveRecord::Base
 			elsif FavoritePet.find_chosen_unavailable_pet(response) 
 				puts "That pet has already been adopted!"
 			elsif FavoritePet.find_chosen_available_pet(response) 
-				FavoritePet.find_chosen_available_pet(response).pet.available = false
-				FavoritePet.find_chosen_available_pet(response).pet.owner_id = self.id
-				FavoritePet.find_chosen_available_pet(response).pet.save
+				fav_pet = FavoritePet.find_chosen_available_pet(response) 
+				fav_pet.pet.available = false
+				fav_pet.pet.owner_id = self.id
+				fav_pet.pet.save
 				puts
-				puts "Congratulations - you've adopted #{FavoritePet.find_chosen_available_pet(response).pet.name}! They will be removed from your favorites."
+				puts "Congratulations - you've adopted #{fav_pet.pet.name}! They will be removed from your favorites."
 				puts
 				67.times do print "*" end 
 				puts
-				FavoritePet.destroy(FavoritePet.find_chosen_available_pet(response).id)
+				FavoritePet.destroy(fav_pet.id)
 				self.present_options
 			else 
 				puts "Please enter a valid pet id from your favorites"
@@ -480,13 +481,18 @@ class Adopter < ActiveRecord::Base
 
 	def shelters_with_volunteer_in_my_area
 		puts "The following shelters in your zip(#{self.zip}) offer volunteer opportunities: "
+		
 		puts
-		67.times do print "*" end 
 		puts
-		puts
+		count = 1
+
 		Shelter.volunteer_shelters.select do |shelter|
 			shelter.zip == self.zip 
-		end.each do |my_shelter| puts "#{my_shelter.name} - #{my_shelter.street} #{my_shelter.city}, #{my_shelter.zip}" end
+		end.each do |my_shelter| 
+			puts "#{count}. #{my_shelter.name} - #{my_shelter.street} #{my_shelter.city}, #{my_shelter.zip}" 
+			count += 1 
+		end
+
 			puts
 	  		67.times do print "*" end 
 			puts
