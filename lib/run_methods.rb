@@ -1,11 +1,13 @@
 require 'artii'
 $user = nil
+
+
 def introduce
 	125.times do print "*" end
 	puts
 	a = Artii::Base.new
 	a.asciify('word') 
-	puts a.asciify('Welcome to Pets R US!') 
+	puts "#{$dog} #{a.asciify('Welcome to Pets R US!')} #{$cat}" 
 	125.times do print "*" end
 	puts
 end

@@ -152,6 +152,12 @@ class Adopter < ActiveRecord::Base
 			if response == "1"
 				species = "dog"
 				puts "You chose '#{species}'. If this is correct, enter 'done'. Otherwise, please re-enter your choice."
+													puts <<-'EOF' 
+^..^      /
+/_/\_____/
+   /\   /\
+  /  \ /  \               
+EOF
 				puts
 				67.times do print "*" end
 				puts
@@ -159,6 +165,12 @@ class Adopter < ActiveRecord::Base
 			elsif response == "2"
 				species = "cat"
 				puts "You chose '#{species}'. If this is correct, enter 'done'. Otherwise, please re-enter your choice."
+									puts <<-'EOF' 
+ |\__/,|   (\												
+ |_ _  |.--.) )
+ ( T   )     /
+(((^_((((((_/                  
+EOF
 				puts
 				67.times do print "*" end
 				puts
@@ -166,6 +178,16 @@ class Adopter < ActiveRecord::Base
 			elsif response == "3"
 				species = "rabbit"
 				puts "You chose '#{species}'. If this is correct, enter 'done'. Otherwise, please re-enter your choice."
+							puts <<-'EOF' 
+       	    ,\
+             \\\,_
+              \` ,\
+         __,.-" =__)
+       ."        )
+    ,_/   ,    \/\_
+    \_|    )_-\ \_-`
+    `-----` `--`               
+EOF
 				puts
 				67.times do print "*" end
 				puts
@@ -186,7 +208,7 @@ class Adopter < ActiveRecord::Base
 					puts
 				end
 				break
-			elsif response.downcase == "quit"
+			elsif response.downcase == "done"
 				puts "Goodbye"
 				puts
 				67.times do print "*" end
@@ -195,7 +217,7 @@ class Adopter < ActiveRecord::Base
 				self.present_options
 				break
 			else
-				puts "Invalid response - to quit, type 'quit'"
+				puts "Invalid response - to quit, type 'done'"
 				puts
 				67.times do print "*" end
 				puts
@@ -246,7 +268,7 @@ class Adopter < ActiveRecord::Base
 					puts
 				end
 				break
-			elsif response.downcase == "quit"
+			elsif response.downcase == "done"
 				puts "Goodbye"
 				self.present_options
 				puts
@@ -255,7 +277,7 @@ class Adopter < ActiveRecord::Base
 				puts
 				break
 			else
-				puts "Invalid response - to quit, type 'quit'"
+				puts "Invalid response - to quit, type 'done'"
 				puts
 				67.times do print "*" end
 				puts
@@ -307,7 +329,7 @@ class Adopter < ActiveRecord::Base
 					puts
 				end
 				break
-			elsif response.downcase == "quit"
+			elsif response.downcase == "done"
 				puts "Goodbye"
 				puts
 				67.times do print "*" end
@@ -316,7 +338,7 @@ class Adopter < ActiveRecord::Base
 				self.present_options
 				break
 			else
-				puts "Invalid response - to quit, type 'quit'"
+				puts "Invalid response - to quit, type 'done'"
 				puts
 				67.times do print "*" end
 				puts
@@ -327,7 +349,7 @@ class Adopter < ActiveRecord::Base
 
 	#set preferred zip
 	def set_preferred_zip
-		puts "Your current zip is #{self.zip}. To change, please enter a new zip or type 'quit' to exit"
+		puts "Your current zip is #{self.zip}. To change, please enter a new zip or type 'done' to exit"
 		zip = nil
 		loop do
 		response = gets.chomp
@@ -344,13 +366,13 @@ class Adopter < ActiveRecord::Base
 				end 
 				break
 			elsif response.to_i == 0
-				puts "Please enter a valid zip or type 'quit' to exit"
+				puts "Please enter a valid zip or type 'done' to exit"
 				puts
 				67.times do print "*" end
 				puts
 				puts
 			elsif response.length != 5
-				puts "Please enter a valid zip or type 'quit' to exit"
+				puts "Please enter a valid zip or type 'done' to exit"
 				puts
 				67.times do print "*" end
 				puts
