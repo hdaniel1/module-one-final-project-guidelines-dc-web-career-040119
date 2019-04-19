@@ -445,7 +445,7 @@ class Adopter < ActiveRecord::Base
 				puts
 				puts "Congratulations - you've adopted #{FavoritePet.find_chosen_available_pet(response).pet.name}! They will be removed from your favorites."
 				puts
-					67.times do print "*" end 
+				67.times do print "*" end 
 				puts
 				FavoritePet.destroy(FavoritePet.find_chosen_available_pet(response).id)
 				self.present_options
