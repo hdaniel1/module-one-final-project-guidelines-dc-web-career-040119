@@ -45,7 +45,7 @@ ActiveRecord::Schema.define(version: 5) do
     t.string  "street"
     t.string  "city"
     t.string  "zip"
-    t.boolean "volunteer?"
+    t.boolean "volunteer"
   end
 
 end

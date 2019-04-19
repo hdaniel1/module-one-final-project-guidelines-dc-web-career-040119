@@ -20,7 +20,8 @@ class Adopter < ActiveRecord::Base
 		puts "1. Review & Update Preferences"
 		puts "2. See available pets"
 		puts "3. View my favorite pets / Adopt a pet"
-		puts "4. Logout"
+		puts "4. Volunteer"
+		puts "5. Logout"
 		puts
 		67.times do print "*" end 
 		puts
@@ -38,7 +39,9 @@ class Adopter < ActiveRecord::Base
      		self.show_available_pets
     	elsif response == "3"
     		self.show_favorite_pets
-		elsif response == "4"
+    	elsif response == "4"
+    		self.shelters_with_volunteer_in_my_area
+		elsif response == "5"
 			puts "Goodbye"
 			$user = nil
 		end
@@ -388,7 +391,15 @@ class Adopter < ActiveRecord::Base
 
     #lets the user favorite a pet from their preferences
   	def favorite_pet 
-  		puts "To favorite a pet, enter the pet's ID"
+
+  		if self.my_preferred_pets.empty? == true
+  			puts "No pets are available per your preferences"
+    		puts
+	  		67.times do print "*" end 
+			puts
+  			self.present_options
+  		else
+  			puts "To favorite a pet, enter the pet's ID"
   		puts
   		67.times do print "*" end 
 		puts
@@ -414,6 +425,7 @@ class Adopter < ActiveRecord::Base
   				end 
   			end 
 		end #ends the loop
+  		end	
 	end 
 
 	def adopt_a_pet
@@ -446,16 +458,37 @@ class Adopter < ActiveRecord::Base
 	
   	#list my favorite pets
   	def show_favorite_pets
-  		"Listed below are pets you have favorited: "
-  		puts
-  		67.times do print "*" end 
+  		if self.favorite_pets.empty? == true
+  			puts "You have not favorited any pets"
+  			puts
+	  		67.times do print "*" end 
+			puts
+  			self.present_options
+  		else 
+	  		"Listed below are pets you have favorited: "
+	  		puts
+	  		67.times do print "*" end 
+			puts
+			puts
+	  		self.favorite_pets.each do |pet|
+	  			pet.pet.show_pet_info 
+			end
+			self.adopt_a_pet
+		end 
+	end 
+
+	def shelters_with_volunteer_in_my_area
+		puts "The following shelters in your zip(#{self.zip}) offer volunteer opportunities: "
+		puts
+		67.times do print "*" end 
 		puts
 		puts
-  		FavoritePet.all.each do |pet|
-  			if pet.adopter_id == self.id
-  				pet.pet.show_pet_info
-		    end 
-		end
-		self.adopt_a_pet
+		Shelter.volunteer_shelters.select do |shelter|
+			shelter.zip == self.zip 
+		end.each do |my_shelter| puts "#{my_shelter.name} - #{my_shelter.street} #{my_shelter.city}, #{my_shelter.zip}" end
+			puts
+	  		67.times do print "*" end 
+			puts
+		self.present_options
 	end 
 end

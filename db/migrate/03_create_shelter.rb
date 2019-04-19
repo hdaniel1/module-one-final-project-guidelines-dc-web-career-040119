@@ -6,7 +6,7 @@ class CreateShelter < ActiveRecord::Migration
 			t.string :street
 			t.string :city
 			t.string :zip 
-			t.boolean :volunteer?
+			t.boolean :volunteer
 		end 
 	end 
 
