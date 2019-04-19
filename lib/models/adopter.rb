@@ -434,23 +434,24 @@ class Adopter < ActiveRecord::Base
   		response = ''
   		while response != "done"
   			response = gets.chomp
-
 			if response.to_i == 0
 				puts "Please enter a valid response or type 'done' to return to the main menu"
-			else
-				self.favorite_pets.each do |pet|
-					# binding.pry
-					
-					if pet.pet_id == response.to_i
-						pet.pet.available = false
-						pet.pet.owner_id = self.id
-						pet.pet.save
-						puts "Congratulations - you've adopted #{pet.pet.name}! They will be removed from your favorites."
-						FavoritePet.destroy(pet.id)
-						self.present_options
-					end 
-				end
-			end 
+			elsif FavoritePet.find_chosen_unavailable_pet(response) 
+				puts "That pet has already been adopted!"
+			elsif FavoritePet.find_chosen_available_pet(response) 
+				FavoritePet.find_chosen_available_pet(response).pet.available = false
+				FavoritePet.find_chosen_available_pet(response).pet.owner_id = self.id
+				FavoritePet.find_chosen_available_pet(response).pet.save
+				puts
+				puts "Congratulations - you've adopted #{FavoritePet.find_chosen_available_pet(response).pet.name}! They will be removed from your favorites."
+				puts
+					67.times do print "*" end 
+				puts
+				FavoritePet.destroy(FavoritePet.find_chosen_available_pet(response).id)
+				self.present_options
+			else 
+				puts "Please enter a valid pet id from your favorites"
+			end
 
 		end #ends the loop
 		self.present_options
