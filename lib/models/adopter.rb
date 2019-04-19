@@ -44,6 +44,7 @@ class Adopter < ActiveRecord::Base
 		elsif response == "5"
 			puts "Goodbye"
 			$user = nil
+			exit
 		end
 	end
 

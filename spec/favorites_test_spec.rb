@@ -15,8 +15,8 @@ describe 'Adopter' do
   	let(:blanche) { Adopter.find_or_create_by(first_name: "Carte", last_name: 'Blanche', preferred_species: "Cat", preferred_size: "Small", preferred_temperament: "Independent", zip: 15151) }
 
   	describe 'Shelter' do
-	  let(:pound) {Shelter.find_or_create_by(name:"The Pound", zip: 25252)}
-	  let(:hra) {Shelter.find_or_create_by(name:"Humane Rescue Alliance", zip: 15151)}
+	  let(:pound) {Shelter.find_or_create_by(name:"The Pound", street: "1800 Fake St.", city: "D.C.", zip: 25252, volunteer: true)}
+	  let(:hra) {Shelter.find_or_create_by(name:"Humane Rescue Alliance", zip: 15151, volunteer: false)}
 
   	describe 'Pet' do 
 	 	let(:buddy) { Pet.find_or_create_by(name: 'Buddy', species: "Dog", breed: "Cairne Terrier", temperament: "Quiet", age: 13, size: "Small", miscellaneous: "Likes chewies", owner_id: nil, available: true, shelter: pound) }
@@ -25,9 +25,14 @@ describe 'Adopter' do
 	 	let(:penny) { Pet.find_or_create_by(name: 'Penny', species: "Cat", breed: "Tortoiseshell", temperament: "Independent", age: 3, size: "Small", miscellaneous: "Fond of sunlight", owner_id: nil, available: false, shelter: pound) }
 	 	let(:fido) { Pet.find_or_create_by(name: 'Fido', species: "Dog", breed: "Daschund", temperament: "Quiet", age: 5, size: "Small", miscellaneous: "Barks at nothing", owner_id: nil, available: false, shelter: pound) }
 
-	 # 	it "checks that I can update my preferences" do
+	 	describe 'FavoritePet' do
+	 		let(:stella_fav) {FavoritePet.find_or_create_by(pet_id: buddy.id, adopter_id: stella.id)}
 
+
+	 # 	it "checks that I can update my preferences" do
+	 # 		expect(stella.preferred_speciesparse_species(gets:"1")).to eq
 		# end
+
 	 	it "checks preferred pets match preferences" do 
 	 		expect(stella.my_preferred_pets).to include(buddy)
 	 	end
@@ -40,6 +45,20 @@ describe 'Adopter' do
 	 		expect(stella.my_preferred_pets).to_not include(fido)
 	 	end
 
+	 	it "checks that I have a favorite pet" do 
+	 		expect(stella.favorite_pets).to include(stella_fav)
+	 	end 
+
+	 	it "checks that I don't have a favorite pet" do 
+	 		expect(blanche.favorite_pets).to eq([])
+	 	end 
+
+	 	# it "checks only volunteer shelters are returned in my area" do 
+	 	# 	expect(stella.shelters_with_volunteer_in_my_area).to output('1. The Pound - 1800 Fake St. D.C., 25252').to_stdout 
+	 	# end
+
+
+	 end
 	 end 
  	end
 end

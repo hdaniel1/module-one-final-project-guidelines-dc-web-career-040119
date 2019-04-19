@@ -35,16 +35,17 @@ https://userguide.rescuegroups.org/display/APIDG/HTTP+API+object+information+and
 		4. Edit my preferences
 		5. See my attended events
 		6. See my volunteer history
+		7. Adopt a pet
 2. Pet
 	-Attributes:
 		1. Name - string, optional
 		2. Breed - string, optional
-		3. Species - string, required
+		3. Species (dog, cat, rabbit) - string, required
 		4. Size (small, medium, large) - string, required
-		5. Temperament (aggressive, sedentary, family-oriented) - string, required
+		5. Temperament (independent, quiet, outgoing) - string, required
 		6. Age - integer, required
 		7. Misc.(Special needs, diet, etc.) - string, optional
-		8. Available?  - boolean, required
+		8. Available - boolean, required
 		9. Owner ID - integer, optional
 	-Methods:
 		1. See all pets
@@ -55,7 +56,7 @@ https://userguide.rescuegroups.org/display/APIDG/HTTP+API+object+information+and
 		2. Street - string, required
 		3. City - string, required
 		4. Zip - string, required
-		5. Volunteer? - boolean, optional
+		5. Volunteer - boolean, optional
 	-Methods:
 		1. See all shelters
 		2. See all pets
@@ -64,30 +65,26 @@ https://userguide.rescuegroups.org/display/APIDG/HTTP+API+object+information+and
 		5. See pets by breed
 		6. See all shelters that have volunteer work
 		7. See all events
-4. Area
-	-Attributes:
-		1. Zip - string, required
-		3. City, string, required
-	-Methods: 
-		1. See all areas
-		2. See all shelters in area
-		3. See all available pets???
-5. Event
+4. Event
 	-Attributes:
 		1. Shelter - integer, required
 		2. Location - string, required
 		3. Description - string, required
 		4. Start_time - datetime, required
 		5. End_time - datetime, required
-6. Favorited_Pets (J)
+5. Favorited_Pets (J)
 	-Attributes:
 		1. Pet - integer, required
 		2. Adopter - integer, required
-7. Volunteer_Interest (J)
+	-Methods:
+		1. See all favorited_pets
+		2. See favorited pets matching an input response that are available
+		3. See favorited pets matching an input response that are unavailable
+6. Volunteer_Interest (J)
 	-Attributes:
 		1. Shelter - integer, required
 		2. Adopter - integer, required
-8. Event_attendance (J)
+7. Event_attendance (J)
 	-Attributes:
 		1. Attended - boolean, optional
 		2. Event - integer, required
@@ -96,7 +93,6 @@ https://userguide.rescuegroups.org/display/APIDG/HTTP+API+object+information+and
 
 # Object Relationships
 Shelter <> Pet = 1:N
-Area <> Shelter = 1:N
 Adopter <> Preferences 1:N
 Adopter <> Pet = N:N through favorited_pets
 Adopter <> Pet = 1:N (owning the pet)
