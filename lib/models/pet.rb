@@ -1,25 +1,25 @@
 class Pet < ActiveRecord::Base
 	belongs_to :shelter
-	belongs_to :adopter
+	belongs_to :adopter, foreign_key: :owner_id
 	has_many :favorite_pets
 	has_many :adopters, through: :favorite_pets
 
 
 	def show_pet_info 
 		print "Pet ID: "
-		puts self.id
+		puts self.reload.id
 	    print "Name: "
 		puts self.name.nil? ? "N/A" : self.name
 		print "Breed: "
-		puts self.breed.nil? ? "N/A" : self.breed
+		puts self.reload.breed.nil? ? "N/A" : self.reload.breed
 		print "Age: "
-		puts self.age.nil? ? "N/A" : self.age
+		puts self.reload.age.nil? ? "N/A" : self.reload.age
 		print "Misc: "
-		puts self.miscellaneous .nil? ? "N/A" : self.miscellaneous
+		puts self.reload.miscellaneous .nil? ? "N/A" : self.reload.miscellaneous
 		print "Available? "
-		puts self.available .nil? ? "N/A" : self.available
+		puts self.reload.available .nil? ? "N/A" : self.reload.available
 		print "Shelter: "
-		puts self.shelter.name.nil? ? "N/A" : self.shelter.name
+		puts self.shelter.reload.name.nil? ? "N/A" : self.shelter.reload.name
 		67.times do print "*" end 
 		puts
 	end 

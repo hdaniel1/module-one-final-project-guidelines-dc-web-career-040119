@@ -53,6 +53,10 @@ describe 'Adopter' do
 	 		expect(blanche.favorite_pets).to eq([])
 	 	end 
 
+	 	it "checks a favorited pet has an adopter" do
+	 		expect(buddy.favorite_pets).to include(stella)
+	 	end
+
 	 	# it "checks only volunteer shelters are returned in my area" do 
 	 	# 	expect(stella.shelters_with_volunteer_in_my_area).to output('1. The Pound - 1800 Fake St. D.C., 25252').to_stdout 
 	 	# end

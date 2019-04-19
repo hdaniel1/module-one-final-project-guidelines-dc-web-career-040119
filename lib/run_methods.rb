@@ -1,5 +1,4 @@
 require 'artii'
-
 $user = nil
 def introduce
 	125.times do print "*" end

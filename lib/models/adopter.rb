@@ -1,8 +1,8 @@
 
 class Adopter < ActiveRecord::Base 
 	has_many :favorite_pets
-	has_many :pets
-	has_many :pets, through: :favorite_pets
+	has_many :owned_pets, class_name: "Pet"
+	has_many :favorited_pets, through: :favorite_pets, source: :pet
 
 	#gets the users fullname
 	def full_name
@@ -34,10 +34,13 @@ class Adopter < ActiveRecord::Base
 	def choose_menu_option
 		response = gets.chomp
 		if response == "1"
+			ActiveRecord::Base.establish_connection(adapter: 'sqlite3', database: 'db/animal_shelter.db')
 			self.show_preferences
     	elsif response == "2"
+    		ActiveRecord::Base.establish_connection(adapter: 'sqlite3', database: 'db/animal_shelter.db')
      		self.show_available_pets
     	elsif response == "3"
+    		ActiveRecord::Base.establish_connection(adapter: 'sqlite3', database: 'db/animal_shelter.db')
     		self.show_favorite_pets
     	elsif response == "4"
     		self.shelters_with_volunteer_in_my_area
@@ -59,7 +62,7 @@ class Adopter < ActiveRecord::Base
 		puts "2. Temperament - #{self.preferred_temperament}"
 		puts "3. Size - #{self.preferred_size}"
 		puts "4. Zip - #{self.zip}"
-		puts "To update your preferences, enter 'change'. Otherwise, enter 'quit' to return to the main menu"
+		puts "To update your preferences, enter 'change'. Otherwise, enter 'done' to return to the main menu"
 		puts
 		67.times do print "*" end 
 		puts
@@ -79,7 +82,7 @@ class Adopter < ActiveRecord::Base
 				self.set_preferred_zip
 				self.present_options
 				break
-			elsif response =='quit'
+			elsif response =='done'
 				self.present_options
 				break
 			else
@@ -374,26 +377,26 @@ class Adopter < ActiveRecord::Base
 	#gets pets based on preferences
 	def my_preferred_pets 
 		my_pets = Pet.all.select do |pet|
-    		pet.temperament.downcase == self.preferred_temperament.downcase && 
-    		pet.size.downcase == self.preferred_size.downcase && 
-    		pet.species.downcase == self.preferred_species.downcase && 
-    		pet.available == true && 
-    		pet.shelter.zip == self.zip
+    		pet.reload.temperament.downcase == self.reload.preferred_temperament.downcase && 
+    		pet.reload.size.downcase == self.reload.preferred_size.downcase && 
+    		pet.reload.species.downcase == self.reload.preferred_species.downcase && 
+    		pet.reload.available == true && 
+    		pet.reload.shelter.zip == self.reload.zip
     	end
 	end 
 
 	#shows pets based on preferences
   	def show_available_pets
-    	self.my_preferred_pets.each do |pet|
-    		pet.show_pet_info    	
+    	self.reload.my_preferred_pets.each do |pet|
+    		pet.reload.show_pet_info    	
 		end 
-		self.favorite_pet
+		self.reload.favorite_pet
     end 
 
     #lets the user favorite a pet from their preferences
   	def favorite_pet 
-
-  		if self.my_preferred_pets.empty? == true
+  	
+  		if self.reload.my_preferred_pets.empty? == true
   			puts "No pets are available per your preferences"
     		puts
 	  		67.times do print "*" end 
@@ -408,7 +411,6 @@ class Adopter < ActiveRecord::Base
 
   		loop do 
   		response = gets.chomp 
-
 			if FavoritePet.find_by(pet_id: response, adopter_id: self.id) 
 				puts "You've already favorited #{FavoritePet.find_by(pet_id: response.to_i, adopter_id: self.id).pet.name} - please enter a different pet ID"
 			elsif response == "done"
@@ -416,7 +418,7 @@ class Adopter < ActiveRecord::Base
 			elsif response.to_i == 0
 				puts "Please enter a pet ID or type 'done' to return to the main menu"
 			else 
-				self.my_preferred_pets.each do |pet|
+				self.reload.my_preferred_pets.each do |pet|
 					if response.to_i == pet.id
 						FavoritePet.find_or_create_by(pet_id: pet.id, adopter_id: self.id)
 						puts "Thanks for considering #{pet.name}! To favorite another pet, enter it's ID or type 'done' to return to the main menu"
@@ -461,7 +463,7 @@ class Adopter < ActiveRecord::Base
 	
   	#list my favorite pets
   	def show_favorite_pets
-  		if self.favorite_pets.empty? == true
+  		if self.reload.favorite_pets.empty? == true
   			puts "You have not favorited any pets"
   			puts
 	  		67.times do print "*" end 
@@ -473,8 +475,8 @@ class Adopter < ActiveRecord::Base
 	  		67.times do print "*" end 
 			puts
 			puts
-	  		self.favorite_pets.each do |pet|
-	  			pet.pet.show_pet_info 
+	  		self.reload.favorite_pets.each do |pet|
+	  			pet.reload.pet.show_pet_info 
 			end
 			self.adopt_a_pet
 		end 
